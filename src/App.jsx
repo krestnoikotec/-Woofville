@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import './App.scss'
+import LogoIcon from "./components/icons/LogoIcon.jsx";
+import ThemeSwitcher from "./components/widgets/themeSwitcher/ThemeSwitcher.jsx";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <LogoIcon size={"4em"} className="logo dog"/>
+        <ThemeSwitcher/>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}

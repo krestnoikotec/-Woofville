@@ -10,12 +10,22 @@
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
+  cursor: pointer;
+
+  .dog{
+    color: var(--color);
+  }
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2rem #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 2rem #61dafbaa);
+}
+
+.logo.dog:hover {
+  filter: drop-shadow(0 0 1rem var(--color))
 }
 
 @keyframes logo-spin {
