@@ -11,11 +11,12 @@
   will-change: filter;
   transition: filter 300ms;
   cursor: pointer;
-
-  .dog{
-    color: var(--color);
-  }
 }
+
+.dog{
+  color: var(--header-background);
+}
+
 .logo:hover {
   filter: drop-shadow(0 0 2rem #646cffaa);
 }

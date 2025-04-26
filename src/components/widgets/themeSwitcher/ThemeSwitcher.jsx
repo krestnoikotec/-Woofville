@@ -12,9 +12,12 @@ const Checkbox = () => {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     }, [theme]);
-
     const toggleTheme = () => {
         setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+        document.documentElement.classList.add('theme-transition');
+        setTimeout(() => {
+            document.documentElement.classList.remove('theme-transition');
+        }, 500);
     }
 
     return (
