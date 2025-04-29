@@ -1,0 +1,60 @@
+.a-style{
+  color: var(--icon-color);
+  transition: color .5s ease, transform 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding: .5rem 0 ;
+  width: 80%;
+  background-color: var(--header-background);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  top: 1.5rem;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3rem;
+  transition: all .5s ease;
+}
+
+.headerLogoText, .headerLoginText{
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin: 0;
+  user-select: none;
+}
+
+.headerNavButtons{
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+}
+
+.headerRightSide{
+  display: flex;
+  flex-direction: row;
+  gap: 5vw;
+}
+
+.headerLogo, .headerAuthentication {
+  @extend .a-style;
+
+  &:hover {
+    color: #131313;
+  }
+
+  &:active {
+    color: var(--icon-color);
+    transform: scale(0.9);
+  }
+}
+
+
