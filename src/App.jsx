@@ -9,6 +9,7 @@ import ThemeSwitcher from "./components/widgets/themeSwitcher/ThemeSwitcher.jsx"
 import MyButton from "./components/ui/button/MyButton.jsx";
 import Header from "./components/layout/header/Header.jsx";
 import {useSelector} from "react-redux";
+import Menu from "./components/widgets/burgerMenu/Menu.jsx";
 
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
@@ -19,6 +20,9 @@ function App() {
 
   return (
     <>
+        {isBurgerOpen === true && (
+            <Menu/>
+        )}
         <Header/>
         <Routes>
             <Route path="/" element={<About/>}></Route>

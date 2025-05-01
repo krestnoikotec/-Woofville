@@ -1,11 +1,10 @@
 import React from 'react';
 
-const LogoIcon = ({ size = "2rem", color = "currentColor", ...props }) => {
+const LogoIcon = ({ color = "currentColor", ...props }) => {
     return (
         <svg
             version="1.0"
             xmlns="http://www.w3.org/2000/svg"
-            height={size}
             viewBox="0 0 682 512"
             fill={color}
             {...props}

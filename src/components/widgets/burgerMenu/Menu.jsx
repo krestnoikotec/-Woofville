@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from "../../layout/header/header.module.scss";
+import styles from "./menu.module.scss";
 import LoginIcon from "../../icons/LoginIcon.jsx";
 import ThemeSwitcher from "../themeSwitcher/ThemeSwitcher.jsx";
 import MyButton from "../../ui/button/MyButton.jsx";
 
-const BurgerMenu = () => {
+const Menu = () => {
     return (
         <div>
             <div className={styles.headerAuthentication}>
@@ -21,4 +21,4 @@ const BurgerMenu = () => {
     );
 };
 
-export default BurgerMenu;
+export default Menu;

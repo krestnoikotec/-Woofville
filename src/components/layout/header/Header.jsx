@@ -10,21 +10,23 @@ import {useDispatch, useSelector} from "react-redux";
 import {toggleBurger} from "../../../redux/reducers/BurgerSlice.js";
 
 const Header = () => {
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 900);
+    const [isDesktop, setIsDesktop] = useState(true);
     const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
     const dispatch = useDispatch();
 
     useEffect(() => {
         const handleResize = () => {
-            setIsDesktop(window.innerWidth > 900);
-        }
+            setIsDesktop(window.innerWidth > 800);
+        };
+
+        handleResize();
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [])
+    }, []);
 
     useEffect(() => {
-        if(isBurgerOpen || isDesktop) {
+        if (isBurgerOpen && isDesktop) {
             dispatch(toggleBurger());
         }
     }, [isDesktop]);
@@ -33,11 +35,11 @@ const Header = () => {
         <header className={styles.header}>
             <div>
                 <Link to="/" className={styles.headerLogo}>
-                    <LogoIcon size="4em" className={styles.headerLogoIcon}/>
+                    <LogoIcon size="4em" className={styles.headerLogoIcon} />
                     <p className={styles.headerLogoText}>WOFVILLE</p>
                 </Link>
             </div>
-            {isDesktop ? (
+            {isDesktop && (
                 <>
                     <nav className={styles.headerNavButtons}>
                         <MyButton to="/">ABOUT</MyButton>
@@ -45,19 +47,20 @@ const Header = () => {
                         <MyButton to="/favorites">FAVORITES</MyButton>
                     </nav>
                     <div className={styles.headerRightSide}>
-                        <ThemeSwitcher/>
+                        <ThemeSwitcher />
                         <div className={styles.headerAuthentication}>
-                            <LoginIcon className={styles.headerLoginIcon}/>
+                            <LoginIcon className={styles.headerLoginIcon} />
                             <p className={styles.headerLoginText}>LOGIN</p>
                         </div>
                     </div>
                 </>
-            ) : (
-                <BurgerButton/>
             )}
-
+            {!isDesktop && (
+                <BurgerButton />
+            )}
         </header>
     );
 };
+
 
 export default Header;
