@@ -50,7 +50,7 @@ const Header = () => {
                         <ThemeSwitcher />
                         <div className={styles.headerAuthentication}>
                             <LoginIcon className={styles.headerLoginIcon} />
-                            <p className={styles.headerLoginText}>LOGIN</p>
+                            <p className={styles.headerLoginText}>LOG IN</p>
                         </div>
                     </div>
                 </>

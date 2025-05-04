@@ -14,10 +14,6 @@ import Menu from "./components/widgets/burgerMenu/Menu.jsx";
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
 
-  useEffect(() => {
-      console.log(isBurgerOpen);
-  }, [isBurgerOpen])
-
   return (
     <>
         {isBurgerOpen === true && (

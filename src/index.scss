@@ -8,18 +8,24 @@
   --card-background: #2d2d2d;
   --border-color: rgba(255, 255, 255, 0.2);
   --icon-color: #2b2b2b;
+  --menu-backgroung: rgba(39, 39, 39, 0.2);
+  --about-poligone: #42677e;
+  --background-pattern: url("/background-pattern.png")
 }
 
 :root[data-theme='light'] {
   --color: #000000;
   --secondary-color: #555;
-  --background-color: #ffffff;
+  --background-color: #f6f6f6;
   --button-color: #ffffff;
   --header-background: rgba(154, 193, 240, 0.2);
   --footer-background: #59afe8;
   --card-background: #f5f5f5;
   --border-color: rgba(0, 0, 0, 0.1);
   --icon-color: #474747;
+  --menu-backgroung: rgba(255, 255, 255, 0.2);
+  --about-poligone: #d6efff;
+  --background-pattern: url("/white-background-pattern.png")
 }
 
 @font-face {
