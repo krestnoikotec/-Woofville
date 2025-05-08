@@ -16,7 +16,7 @@
 
 .header {
   position: sticky;
-  margin: 1.5rem auto 0;
+  margin: 1.5rem auto;
   top: 1.5rem;
 
   display: flex;
@@ -26,13 +26,13 @@
 
   width: 80%;
   max-width: 1200px;
-  padding: 0.5rem 0;
+  padding: 8px 0;
 
   background-color: var(--header-background);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
-  border-radius: 3rem;
+  border-radius: 48px;
   transition: all 0.5s ease;
   z-index: 1000;
 
