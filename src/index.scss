@@ -28,9 +28,15 @@
   --background-pattern: url("/white-background-pattern.png")
 }
 
+@font-face {
+  font-family: "DM Sans";
+  src: url("./fonts/DMSans-VariableFont_opsz,wght.ttf") format("truetype");
+  font-style: normal;
+}
+
 :root {
   --shadow-color: rgba(0, 0, 0, 0.4);
-  font-family: DM Sans,sans-serif;
+  font-family: "DM Sans",sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: var(--color);

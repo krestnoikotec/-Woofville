@@ -21,15 +21,13 @@ const About = () => {
             <section className={styles.infoSection}>
                 <h3 className={styles.infoTitle}>Discover Joy Through Dog Photos</h3>
                 <p className={styles.infoSubtitle}>Welcome to Woofville, where we celebrate the joy and warmth that dogs bring to our lives through captivating images that uplift your spirit and brighten your day.</p>
-                <div className={styles.infoStats}>
-                    <div className={styles.statItem}>
-                        <h3 className={styles.statNumber}>150+</h3>
-                        <p className={styles.statLabel}>Love Dogs</p>
-                    </div>
-                    <div className={styles.statItem}>
-                        <h3 className={styles.statNumber}>15</h3>
-                        <p className={styles.statLabel}>Join Our Community</p>
-                    </div>
+                <div className={`${styles.statItem}  ${styles.statsFirst}`}>
+                    <h3 className={styles.statNumber}>150+</h3>
+                    <p className={styles.statLabel}>Love Dogs</p>
+                </div>
+                <div className={`${styles.statItem} ${styles.statsSecond}`}>
+                    <h3 className={styles.statNumber}>15</h3>
+                    <p className={styles.statLabel}>Join Our Community</p>
                 </div>
                 <img
                     className={styles.infoImage}
