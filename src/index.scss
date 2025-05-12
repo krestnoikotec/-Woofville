@@ -1,22 +1,25 @@
 :root[data-theme='dark'] {
-  --color: #ffffff;
-  --secondary-color: #b0b0b0;
+  --color: rgba(255, 255, 255, 0.93);
+  --secondary-color: rgba(176, 176, 176, 0.9);
   --background-color: #242424;
+  --home-gradient: linear-gradient(135deg, #0f1a2e, #3a506b 70%);
+  --connection-background: rgba(25, 43, 85, 0.7);
   --button-color: #1a1a1a;
   --header-background: rgba(112, 153, 213, 0.2);
   --footer-background: #196ea1;
   --card-background: #2d2d2d;
   --border-color: rgba(255, 255, 255, 0.2);
-  --icon-color: #2b2b2b;
+  --icon-color: #aaaaaa;
   --menu-backgroung: rgba(39, 39, 39, 0.2);
-  --about-poligone: #42677e;
   --background-pattern: url("/background-pattern.png")
 }
 
 :root[data-theme='light'] {
   --color: #000000;
-  --secondary-color: #555;
+  --secondary-color: rgba(93, 96, 103, 0.9);
   --background-color: #f6f6f6;
+  --home-gradient: linear-gradient(135deg, #D8EAFE, #5B8DB8 70%);
+  --connection-background: #d8eafe;
   --button-color: #ffffff;
   --header-background: rgba(154, 193, 240, 0.2);
   --footer-background: #59afe8;
@@ -24,7 +27,6 @@
   --border-color: rgba(0, 0, 0, 0.1);
   --icon-color: #474747;
   --menu-backgroung: rgba(255, 255, 255, 0.2);
-  --about-poligone: #d6efff;
   --background-pattern: url("/white-background-pattern.png")
 }
 

@@ -7,7 +7,7 @@
   place-items: center;
   gap: 1.5rem;
   padding: 6rem 2rem;
-  background: linear-gradient(135deg, #D8EAFE, #5B8DB8 70%);
+  background: var(--home-gradient);
 }
 
 .heroTitle {
@@ -29,10 +29,14 @@
   font-weight: 400;
 }
 
-.infoSection{
-  width: 80%;
+.infoSection {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5rem 15%;
   margin: 0 auto;
-  padding: 5rem 0;
+}
+
+.infoContent {
   display: grid;
   grid-template-columns: repeat(4, minmax(200px, 400px));
   grid-template-rows: repeat(3, auto);
@@ -53,6 +57,7 @@
   text-align: start;
   font-weight: 600;
   margin: 0;
+  color: var(--color)
 }
 
 .infoSubtitle{
@@ -63,6 +68,7 @@
   text-align: start;
   margin: 0;
   font-weight: 400;
+  color: var(--secondary-color)
 }
 
 .statsFirst{
@@ -105,18 +111,275 @@
   border-radius: 2rem;
 }
 
+.connectionSection{
+  box-sizing: border-box;
+  width: 100%;
+  padding: 5rem 15%;
+  background-color: var(--connection-background);
+}
+
+.connectionContent{
+  display: grid;
+  width: 100%;
+  margin: 0 auto;
+  grid-template-columns: repeat(3, 1fr) 100px repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr) repeat(2, 2rem) 1fr 2rem 1fr 2rem 1fr 2rem;
+}
+
+.connectionTitle{
+  font-size: 3rem;
+  color: var(--color);
+  margin: 0;
+  grid-column: 1/-1;
+  grid-row: 1/2;
+}
+
+.connectionSubTitle{
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--secondary-color);
+  grid-column: 1/-1;
+  grid-row: 2/3;
+}
+
+.connectionTextGroup{
+  display: flex;
+  flex-direction: column;
+  grid-column: 5/-1;
+  grid-row: 3/-1;
+  justify-content: space-evenly;
+
+  > * {
+    margin: 0;
+    text-align: start;
+  }
+}
+
+.connectionItem{
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+
+  > * {
+    margin: 0;
+  }
+}
+
+.itemHeading{
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color);
+}
+
+.itemDescription{
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+
+.connectionImage{
+  border-radius: 2rem;
+  object-fit: cover;
+  width: 100%;
+  height: 27rem;
+  grid-column: 1/4;
+  grid-row: 3/-1;
+  filter: grayscale(100%);
+}
+
+.gallerySection{
+  box-sizing: border-box;
+  padding: 5rem 15%;
+  width: 100%;
+}
+
+.galleryContent{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 5rem;
+}
+
+.galleryText{
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin: 0;
+  }
+}
+
+.galleryTitle{
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--color);
+}
+
+.gallerySubtitle{
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--secondary-color);
+}
+
+.galleryPhotoGroup{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  max-width: 100%;
+
+  > * {
+    height: 28rem;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+}
+
+.photoFirst{
+  grid-area: 1/1/2/3;
+}
+
+.photoSecond{
+  grid-area: 1/3/2/-1;
+}
+
+.photoThird{
+  grid-area: 2/1/3/2;
+}
+
+.photoFourth{
+  grid-area: 2/2/3/4;
+}
+
+.commentSection{
+  width: 100%;
+  padding: 0 15% 5rem 15%;
+  box-sizing: border-box;
+}
+
+.commentContent{
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  overflow: hidden;
+  background-color: #5b8db8;
+}
+
+.commentImage{
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+}
+
+.commentTextBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  gap: 2rem;
+
+  > * {
+    margin: 0;
+  }
+}
+
+.commentStars{
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.commentText{
+  color: #fff;
+  max-width: 22rem;
+  font-size: 1.2rem;
+}
+
+.commentUser{
+  gap: .5rem;
+
+    > * {
+      margin: 0;
+    }
+}
+
+.userImage{
+  width: 3rem;
+  height: 3rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userName{
+  font-size: 1.2rem;
+  color: #fff;
+}
+
 @media (max-width: 1080px){
 
   .heroTitle{
     font-size: 3rem;
   }
 
-  .infoTitle{
+  .infoTitle, .connectionTitle, .galleryTitle{
     font-size: 2rem;
   }
 
-  .infoSection{
+  .infoImage, .connectionImage{
+    height: 17rem;
+  }
+
+  .infoSection, .connectionSection, .gallerySection, .gallerySection{
+    padding: 3rem 15%;
+  }
+
+  .connectionContent, .infoContent, .commentContent{
     display: flex;
     flex-direction: column;
   }
+
+  .galleryContent{
+    gap: 2rem;
+  }
+
+  .infoContent{
+    gap: 1.5rem;
+  }
+
+  .connectionTextGroup{
+    margin: 2rem 0;
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  .galleryPhotoGroup{
+    grid-template-columns: repeat(2, 1fr) 2fr;
+    grid-template-rows: repeat(2, 1fr);
+
+    > * {
+      height: 10rem;
+    }
+
+    .photoThird{
+      grid-area: 2/1/3/3;
+    }
+
+    .photoFourth{
+      grid-area: 2/3/3/4;
+    }
+
+  }
+
+  .commentImage{
+    width: auto;
+    height: 100%;
+  }
+
+  .commentTextBox{
+    width: 80%;
+    margin: 0 auto;
+  }
+
 }
