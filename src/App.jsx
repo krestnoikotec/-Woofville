@@ -10,6 +10,7 @@ import MyButton from "./components/ui/button/MyButton.jsx";
 import Header from "./components/layout/header/Header.jsx";
 import {useSelector} from "react-redux";
 import Menu from "./components/widgets/burgerMenu/Menu.jsx";
+import Footer from "./components/layout/footer/Footer.jsx";
 
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
@@ -25,6 +26,7 @@ function App() {
             <Route path="/search" element={<Search />} />
             <Route path="/favorites" element={<Favorites/>}></Route>
         </Routes>
+        <Footer/>
     </>
   )
 }
