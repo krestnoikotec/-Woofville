@@ -2,9 +2,11 @@
   text-align: center;
 }
 
-body{
+body, html {
   margin: 0;
   background-color: var(--background-color);
+  color: var(--color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 

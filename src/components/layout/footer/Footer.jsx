@@ -10,37 +10,43 @@ const Footer = () => {
         <footer className={styles.footer}>
             <div className={styles.footerContent}>
                 <div className={styles.footerIcons}>
-                    <h3 className={styles.iconsTitle}>
+                    <h4 className={styles.footerTitle}>
                         Joy
-                    </h3>
-                    <p className={styles.iconsSubtitle}>
+                    </h4>
+                    <p className={styles.footerSubtitle}>
                         Explore delightful dog photos to brighten your day.
                     </p>
                     <div className={styles.iconsGroup}>
-                        <FacebookIcon className={styles.socialIcon}/>
-                        <InstagramIcon className={styles.socialIcon}/>
-                        <TiktokIcon className={styles.socialIcon}/>
-                        <XIcon className={styles.socialIcon}/>
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
+                            <FacebookIcon className={styles.socialIcon} />
+                        </a>
+                        <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                            <InstagramIcon className={styles.socialIcon}/>
+                        </a>
+                        <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+                            <TiktokIcon className={styles.socialIcon}/>
+                        </a>
+                        <a href="https://x.com/" target="_blank" rel="noopener noreferrer">
+                            <XIcon className={styles.socialIcon}/>
+                        </a>
                     </div>
                 </div>
                 <div className={styles.footerContacts}>
-                    <h5 className={styles.constactsTitle}>
+                    <h4 className={styles.footerTitle}>
                         Paws
-                    </h5>
-                    <div className={styles.contactsGroup}>
-                        <p className={styles.contant}>
-                            woofville@dogmail.com
-                        </p>
-                        <p className={styles.contact}>
-                            123-456-7890
-                        </p>
-                    </div>
+                    </h4>
+                    <p className={styles.footerSubtitle}>
+                        woofville@dogmail.com
+                    </p>
+                    <p className={styles.footerSubtitle}>
+                        123-456-7890
+                    </p>
                 </div>
                 <div className={styles.footerNews}>
-                    <h5 className={styles.newsTitle}>
+                    <h4 className={styles.footerTitle}>
                         Bark
-                    </h5>
-                    <p className={styles.newsSybtitle}>
+                    </h4>
+                    <p className={styles.footerSubtitle}>
                         Enter your email address
                     </p>
                     <form className={styles.newsForm}>

@@ -5,7 +5,7 @@ const Checkbox = () => {
     const [theme, setTheme] = React.useState(() => {
         const stored = localStorage.getItem('theme');
         if (stored) return stored;
-        return  window.matchMedia('(prefers-color-scheme: light)').matches ? "light" : "dark";
+        return  window.matchMedia('(prefers-color-scheme: light)').matches;
     });
 
     React.useEffect(() => {
@@ -14,10 +14,6 @@ const Checkbox = () => {
     }, [theme]);
     const toggleTheme = () => {
         setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-        document.documentElement.classList.add('theme-transition');
-        setTimeout(() => {
-            document.documentElement.classList.remove('theme-transition');
-        }, 500);
     }
 
     return (

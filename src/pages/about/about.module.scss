@@ -3,6 +3,7 @@
 }
 
 .heroSection {
+  position: relative;
   display: grid;
   place-items: center;
   gap: 1.5rem;
@@ -116,6 +117,7 @@
   width: 100%;
   padding: 5rem 15%;
   background-color: var(--connection-background);
+  transition: background-color 0.3s ease;
 }
 
 .connectionContent{
@@ -264,7 +266,8 @@
   flex-direction: row;
   align-items: stretch;
   overflow: hidden;
-  background-color: #5b8db8;
+  background-color: var(--comment-background);
+  transition: background-color 0.3s ease
 }
 
 .commentImage{

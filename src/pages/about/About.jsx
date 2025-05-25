@@ -1,8 +1,17 @@
 import React from 'react';
 import styles from './about.module.scss';
 import MyButton from "../../components/ui/button/MyButton.jsx";
+import curlyDog from "@/assets/images/curlyDog.webp"
+import brownDog from "@/assets/images/brownDog.webp"
+import dogWithBeard from "@/assets/images/dogWithBeard.webp"
+import dogWithCollar from "@/assets/images/dogWithCollar.webp"
+import dogWithGlasses from "@/assets/images/dogWithGlasses.webp"
+import dogWithOpenMouth from "@/assets/images/dogWithOpenMouth.webp"
+import happyDog from "@/assets/images/happyDog.webp"
+import userPhoto from "@/assets/images/userPhoto.webp"
 
 const About = () => {
+
     return (
         <div className={styles.aboutPage}>
             <section className={styles.heroSection}>
@@ -15,8 +24,6 @@ const About = () => {
                 <MyButton to="/search">
                     Explore
                 </MyButton>
-                {/*<img className={styles.aboutDogImage1} src="https://media.istockphoto.com/id/1041987488/photo/cute-dog-put-his-face-on-his-knees-to-the-man-and-smiling-from-the-hands-scratching-her-ear.jpg?s=612x612&w=0&k=20&c=NKGf8nmXVdksmNS0Ay696cVPNSIfCJJ1yu_y9jFGBsM=" alt="smillig dog"/>*/}
-                {/*<img className={styles.aboutDogImage2} src="https://media.istockphoto.com/id/1155030342/uk/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D0%BE%D0%B1%D0%B0%D0%BA%D0%B0-%D0%BF%D0%BE%D0%B4%D0%BE%D1%80%D0%BE%D0%B6-%D0%BD%D0%B0-%D0%BC%D0%B0%D1%88%D0%B8%D0%BD%D1%96.jpg?s=612x612&w=0&k=20&c=YtOaHQpZelmAYt5eGFZnBzwv5qd4C9Zzhb4yy6UJgfY=" alt="dog in the car"/>*/}
             </section>
             <section className={styles.infoSection}>
                 <div className={styles.infoContent}>
@@ -32,7 +39,7 @@ const About = () => {
                     </div>
                     <img
                         className={styles.infoImage}
-                        src="https://images.unsplash.com/photo-1584720611279-4bafbc05600a?auto=format&fit=clip&w=1224&q=100"
+                        src={curlyDog}
                         alt="A fluffy dog with curly fur and big eyes gazes attentively at the camera, resting on soft, neutral-toned blankets. The lighting is warm and cozy, highlighting the dog's mischievous yet endearing expression."
                     />
                 </div>
@@ -72,8 +79,8 @@ const About = () => {
                         </div>
                     </div>
                     <img
-                        src="https://media.istockphoto.com/id/1041987488/photo/cute-dog-put-his-face-on-his-knees-to-the-man-and-smiling-from-the-hands-scratching-her-ear.jpg?s=612x612&w=0&k=20&c=NKGf8nmXVdksmNS0Ay696cVPNSIfCJJ1yu_y9jFGBsM="
-                        alt=""
+                        src={happyDog}
+                        alt="A small dog rests its head on a person's knees, smiling as its ear is gently scratched."
                         className={styles.connectionImage}
                     />
                 </div>
@@ -90,23 +97,23 @@ const About = () => {
                     </div>
                     <div className={styles.galleryPhotoGroup}>
                         <img
-                            src="https://images.unsplash.com/photo-1562619404-4589ea593cfa?auto=format&fit=clip&w=812&q=100"
-                            alt=""
+                            src={dogWithCollar}
+                            alt="A close-up of a fluffy puppy with collar."
                             className={styles.photoFirst}
                         />
                         <img
-                            src="https://images.unsplash.com/photo-1544142092-9c5da16c05b8?auto=format&fit=clip&h=432&q=100"
-                            alt=""
+                            src={dogWithGlasses}
+                            alt="A dog with a concentrated expression on his face sits outside and wears glasses."
                             className={styles.photoSecond}
                         />
                         <img
-                            src="https://images.unsplash.com/photo-1619079647665-dcbf0ee7d720?auto=format&fit=clip&h=432&q=100"
-                            alt=""
+                            src={dogWithBeard}
+                            alt="A black dog looking at the camera and having a white beard"
                             className={styles.photoThird}
                         />
                         <img
-                            src="https://images.unsplash.com/photo-1703345364306-8eb8d9174a46?auto=format&fit=clip&w=812&q=100"
-                            alt=""
+                            src={dogWithOpenMouth}
+                            alt="Happy dog with open mouth."
                             className={styles.photoFourth}
                         />
                     </div>
@@ -115,8 +122,8 @@ const About = () => {
             <section className={styles.commentSection}>
                 <div className={styles.commentContent}>
                     <img
-                        src="https://images.unsplash.com/photo-1553882809-11e20087a8e0?auto=format&fit=clip&w=612&q=100"
-                        alt=""
+                        src={brownDog}
+                        alt="Brown dog with a dark muzzle looking to the side."
                         className={styles.commentImage}
                     />
                     <div className={styles.commentTextBox}>
@@ -128,8 +135,8 @@ const About = () => {
                         </p>
                         <div className={styles.commentUser}>
                             <img
-                                src="https://images.unsplash.com/photo-1621122082654-73c40fd4bc57?auto=format&fit=clip&w=48&q=100"
-                                alt=""
+                                src={userPhoto}
+                                alt="Small brown puppy with a white spot."
                                 className={styles.userImage}
                             />
                             <p className={styles.userName}>

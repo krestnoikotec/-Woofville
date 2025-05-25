@@ -5,10 +5,9 @@ const TiktokIcon = ({ color = "currentColor", ...props }) => {
         <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 32 32"
-            width="24px"
-            height="24px"
+            width="auto"
             fill="none"
-            stroke={color}
+            stroke="none"
             {...props}
         >
             <path
