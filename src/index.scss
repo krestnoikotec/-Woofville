@@ -3,7 +3,7 @@
   --secondary-color: rgba(176, 176, 176, 0.9);
   --background-color: #242424;
   --home-gradient: linear-gradient(135deg, #0f1a2e, #3a506b 70%);
-  --connection-background: rgba(25, 43, 85, 0.7);
+  --connection-background: rgba(60, 101, 133, 0.7);
   --button-color: #1a1a1a;
   --header-background: rgba(112, 153, 213, 0.2);
   --footer-background: #196ea1;
@@ -11,7 +11,8 @@
   --border-color: rgba(255, 255, 255, 0.2);
   --icon-color: #aaaaaa;
   --menu-backgroung: rgba(39, 39, 39, 0.2);
-  --background-pattern: url("/background-pattern.png")
+  --comment-background: #315a7e;
+  --background-pattern: url("/background-pattern.webp")
 }
 
 :root[data-theme='light'] {
@@ -27,7 +28,8 @@
   --border-color: rgba(0, 0, 0, 0.1);
   --icon-color: #474747;
   --menu-backgroung: rgba(255, 255, 255, 0.2);
-  --background-pattern: url("/white-background-pattern.png")
+  --comment-background: #5b8db8;
+  --background-pattern: url("/white-background-pattern.webp")
 }
 
 @font-face {
@@ -47,8 +49,4 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.theme-transition {
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
