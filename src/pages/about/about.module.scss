@@ -151,10 +151,6 @@
   grid-row: 3/-1;
   justify-content: space-evenly;
 
-  > * {
-    margin: 0;
-    text-align: start;
-  }
 }
 
 .connectionItem{
@@ -164,6 +160,7 @@
 
   > * {
     margin: 0;
+    text-align: start;
   }
 }
 
