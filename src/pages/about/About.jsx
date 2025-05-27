@@ -9,35 +9,112 @@ import dogWithGlasses from "@/assets/images/dogWithGlasses.webp"
 import dogWithOpenMouth from "@/assets/images/dogWithOpenMouth.webp"
 import happyDog from "@/assets/images/happyDog.webp"
 import userPhoto from "@/assets/images/userPhoto.webp"
+import {motion} from 'framer-motion';
+
+const listItems = [
+    {
+        title: "Puppy Love",
+        description: "Discover the charm of puppies through captivating images that warm your heart.",
+    },
+    {
+        title: "Adorable Dog Moments",
+        description: "Delight in heartwarming images of dogs that will make you smile.",
+    },
+    {
+        title: "Joyful Paws",
+        description: "Experience the happiness that comes from viewing playful and loving dog photos.",
+    },
+];
+
+const scrollAnimation = {
+    hidden: {
+        y: 70,
+        opacity: 0,
+    },
+    visible: custom => ({
+        y: 0,
+        opacity: 1,
+        transition: { duration: .4, delay: custom * 0.2 },
+    }),
+}
+
+const animation = {
+    initial: "hidden",
+    whileInView: "visible",
+}
 
 const About = () => {
 
     return (
         <div className={styles.aboutPage}>
-            <section className={styles.heroSection}>
-                <h1 className={styles.heroTitle}>
+            <section
+                className={styles.heroSection}>
+                <motion.h1
+                    variants={scrollAnimation}
+                    {...animation}
+                    viewport={{once: true}}
+                    className={styles.heroTitle}>
                     Escape into a World of Adorable Dogs
-                </h1>
-                <p className={styles.heroSubtitle}>
+                </motion.h1>
+                <motion.p
+                    custom={.5}
+                    variants={scrollAnimation}
+                    {...animation}
+                    viewport={{once: true}}
+                    className={styles.heroSubtitle}>
                     Brighten your day with delightful dog photos that bring joy and warmth to your heart.
-                </p>
-                <MyButton to="/search">
-                    Explore
-                </MyButton>
+                </motion.p>
+                <motion.div
+                    custom={1}
+                    variants={scrollAnimation}
+                    {...animation}
+                    viewport={{once: true}}
+                >
+                    <MyButton to="/search">
+                        Explore
+                    </MyButton>
+                </motion.div>
             </section>
             <section className={styles.infoSection}>
                 <div className={styles.infoContent}>
-                    <h3 className={styles.infoTitle}>Discover Joy Through Dog Photos</h3>
-                    <p className={styles.infoSubtitle}>Welcome to Woofville, where we celebrate the joy and warmth that dogs bring to our lives through captivating images that uplift your spirit and brighten your day.</p>
-                    <div className={`${styles.statItem}  ${styles.statsFirst}`}>
+                    <motion.h3
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={styles.infoTitle}>
+                        Discover Joy Through Dog Photos
+                    </motion.h3>
+                    <motion.p
+                        custom={.5}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={styles.infoSubtitle}>
+                        Welcome to Woofville, where we celebrate the joy and warmth that dogs bring to our lives through captivating images that uplift your spirit and brighten your day.
+                    </motion.p>
+                    <motion.div
+                        custom={1}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={`${styles.statItem}  ${styles.statsFirst}`}>
                         <h3 className={styles.statNumber}>150+</h3>
                         <p className={styles.statLabel}>Love Dogs</p>
-                    </div>
-                    <div className={`${styles.statItem} ${styles.statsSecond}`}>
+                    </motion.div>
+                    <motion.div
+                        custom={1.5}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={`${styles.statItem} ${styles.statsSecond}`}>
                         <h3 className={styles.statNumber}>15</h3>
                         <p className={styles.statLabel}>Join Our Community</p>
-                    </div>
-                    <img
+                    </motion.div>
+                    <motion.img
+                        custom={2}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
                         className={styles.infoImage}
                         src={curlyDog}
                         alt="A fluffy dog with curly fur and big eyes gazes attentively at the camera, resting on soft, neutral-toned blankets. The lighting is warm and cozy, highlighting the dog's mischievous yet endearing expression."
@@ -46,39 +123,42 @@ const About = () => {
             </section>
             <section className={styles.connectionSection}>
                 <div className={styles.connectionContent}>
-                    <h3 className={styles.connectionTitle}>
+                    <motion.h3
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={styles.connectionTitle}>
                         Cute Dog Gallery
-                    </h3>
-                    <p className={styles.connectionSubTitle}>
+                    </motion.h3>
+                    <motion.p
+                        custom={.5}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={styles.connectionSubTitle}>
                         Explore adorable dog photos that brighten your day and bring joy to your life.
-                    </p>
-                    <div className={styles.connectionTextGroup}>
-                        <div className={styles.connectionItem}>
-                            <h5 className={styles.itemHeading}>
-                                Puppy Love
-                            </h5>
-                            <p className={styles.itemDescription}>
-                                Discover the charm of puppies through captivating images that warm your heart.
-                            </p>
-                        </div>
-                        <div className={styles.connectionItem}>
-                            <h5 className={styles.itemHeading}>
-                                Adorable Dog Moments
-                            </h5>
-                            <p className={styles.itemDescription}>
-                                Delight in heartwarming images of dogs that will make you smile.
-                            </p>
-                        </div>
-                        <div className={styles.connectionItem}>
-                            <h5 className={styles.itemHeading}>
-                                Joyful Paws
-                            </h5>
-                            <p className={styles.itemDescription}>
-                                Experience the happiness that comes from viewing playful and loving dog photos.
-                            </p>
-                        </div>
-                    </div>
-                    <img
+                    </motion.p>
+                    <motion.ul
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
+                        className={styles.connectionTextGroup}>
+                        {listItems.map((item, i) => {
+                            return (
+                            <motion.li
+                                custom={i*0.7}
+                                variants={scrollAnimation}
+                                key={item.title} className={styles.connectionItem}>
+                                <h5 className={styles.itemHeading}>{item.title}</h5>
+                                <p className={styles.itemDescription}>{item.description}</p>
+                            </motion.li>
+                        )})}
+                    </motion.ul>
+                    <motion.img
+                        custom={1}
+                        variants={scrollAnimation}
+                        {...animation}
+                        viewport={{once: true}}
                         src={happyDog}
                         alt="A small dog rests its head on a person's knees, smiling as its ear is gently scratched."
                         className={styles.connectionImage}
@@ -88,30 +168,54 @@ const About = () => {
             <section className={styles.gallerySection}>
                 <div className={styles.galleryContent}>
                     <div className={styles.galleryText}>
-                        <h3 className={styles.galleryTitle}>
+                        <motion.h3
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
+                            className={styles.galleryTitle}
+                        >
                             Dog Gallery
-                        </h3>
-                        <p className={styles.gallerySubtitle}>
+                        </motion.h3>
+                        <motion.p
+                            custom={.5}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
+                            className={styles.gallerySubtitle}>
                             Explore heartwarming dog photos that brighten your day instantly.
-                        </p>
+                        </motion.p>
                     </div>
                     <div className={styles.galleryPhotoGroup}>
-                        <img
+                        <motion.img
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
                             src={dogWithCollar}
                             alt="A close-up of a fluffy puppy with collar."
                             className={styles.photoFirst}
                         />
-                        <img
+                        <motion.img
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
                             src={dogWithGlasses}
                             alt="A dog with a concentrated expression on his face sits outside and wears glasses."
                             className={styles.photoSecond}
                         />
-                        <img
+                        <motion.img
+                            custom={.5}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
                             src={dogWithBeard}
                             alt="A black dog looking at the camera and having a white beard"
                             className={styles.photoThird}
                         />
-                        <img
+                        <motion.img
+                            custom={.5}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
                             src={dogWithOpenMouth}
                             alt="Happy dog with open mouth."
                             className={styles.photoFourth}
@@ -119,7 +223,12 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            <section className={styles.commentSection}>
+            <motion.section
+                variants={scrollAnimation}
+                {...animation}
+                viewport={{once: true}}
+                className={styles.commentSection}
+            >
                 <div className={styles.commentContent}>
                     <img
                         src={brownDog}
@@ -127,13 +236,29 @@ const About = () => {
                         className={styles.commentImage}
                     />
                     <div className={styles.commentTextBox}>
-                        <p className={styles.commentStars}>
+                        <motion.p
+                            custom={.3}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
+                            className={styles.commentStars}
+                        >
                             ★★★★★
-                        </p>
-                        <p className={styles.commentText}>
+                        </motion.p>
+                        <motion.p
+                            custom={.6}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
+                            className={styles.commentText}>
                             Woofville's dog photos bring joy and warmth, brightening my day with every adorable image!
-                        </p>
-                        <div className={styles.commentUser}>
+                        </motion.p>
+                        <motion.div
+                            custom={.9}
+                            variants={scrollAnimation}
+                            {...animation}
+                            viewport={{once: true}}
+                            className={styles.commentUser}>
                             <img
                                 src={userPhoto}
                                 alt="Small brown puppy with a white spot."
@@ -142,10 +267,10 @@ const About = () => {
                             <p className={styles.userName}>
                                 Happy User
                             </p>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
-            </section>
+            </motion.section>
         </div>
     );
 };
