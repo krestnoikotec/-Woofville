@@ -20,7 +20,8 @@
 
 .cardImg{
   object-fit: cover;
-  height: 400px;
+  object-position: center top;
+  height: 300px;
   width: 100%;
   border-radius: 3rem;
 }
