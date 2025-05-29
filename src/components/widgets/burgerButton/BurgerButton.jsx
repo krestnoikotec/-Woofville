@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './burgerButton.module.scss';
 import { useSelector, useDispatch } from 'react-redux';
-import {toggleBurger} from "../../../redux/reducers/BurgerSlice.js";
+import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
 
 const BurgerButton = () => {
     const dispatch = useDispatch();

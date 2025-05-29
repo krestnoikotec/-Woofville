@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import ThemeSwitcher from "../../widgets/themeSwitcher/ThemeSwitcher.jsx";
 import BurgerButton from "../../widgets/burgerButton/BurgerButton.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {toggleBurger} from "../../../redux/reducers/BurgerSlice.js";
+import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
 
 const Header = () => {
     const [isDesktop, setIsDesktop] = useState(true);

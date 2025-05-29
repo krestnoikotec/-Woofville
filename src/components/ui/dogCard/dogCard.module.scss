@@ -1,0 +1,122 @@
+.card{
+  max-width: 30rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  position: relative;
+  border-radius: 3rem;
+  border: 1px #3fa3e3 solid;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.cardWrapper{
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: .7rem;
+}
+
+.cardImg{
+  object-fit: cover;
+  height: 400px;
+  width: 100%;
+  border-radius: 3rem;
+}
+
+.cardDescription{
+  width: 100%;
+  text-align: start;
+  color: var(--color);
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.heartContainer {
+  --heart-color: rgb(255, 91, 137);
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  transition: .3s;
+}
+
+.heartContainer .checkbox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.heartContainer .svgContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heartContainer .svgOutline,
+.heartContainer .svgFilled {
+  fill: var(--heart-color);
+  position: absolute;
+}
+
+.heartContainer .svgFilled {
+  animation: keyframes-svg-filled 1s;
+  display: none;
+}
+
+.heartContainer .svgCelebrate {
+  position: absolute;
+  animation: keyframes-svg-celebrate .5s;
+  animation-fill-mode: forwards;
+  display: none;
+  stroke: var(--heart-color);
+  fill: var(--heart-color);
+  stroke-width: 2px;
+}
+
+.heartContainer .checkbox:checked~.svgContainer .svgFilled {
+  display: block
+}
+
+.heartContainer .checkbox:checked~.svgContainer .svgCelebrate {
+  display: block
+}
+
+@keyframes keyframes-svg-filled {
+  0% {
+    transform: scale(0);
+  }
+
+  25% {
+    transform: scale(1.2);
+  }
+
+  50% {
+    transform: scale(1);
+    filter: brightness(1.5);
+  }
+}
+
+@keyframes keyframes-svg-celebrate {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.5);
+  }
+
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+    display: none;
+  }
+}

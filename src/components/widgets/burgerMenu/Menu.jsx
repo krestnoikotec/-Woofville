@@ -5,7 +5,7 @@ import ThemeSwitcher from "../themeSwitcher/ThemeSwitcher.jsx";
 import MyButton from "../../ui/button/MyButton.jsx";
 import BurgerButton from "../burgerButton/BurgerButton.jsx";
 import {useDispatch} from "react-redux";
-import {toggleBurger} from "../../../redux/reducers/BurgerSlice.js";
+import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
 
 const Menu = () => {
 
