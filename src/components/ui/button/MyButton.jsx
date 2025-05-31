@@ -12,7 +12,7 @@ const MyButton = ({to, children, onClick, ...props}) => {
     }
 
     return (
-        <button {...props} className={styles.butt}>
+        <button {...props} className={styles.butt} onClick={onClick}>
             {children}
         </button>
     );
