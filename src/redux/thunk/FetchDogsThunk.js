@@ -8,10 +8,19 @@ export const fetchDogImages = createAsyncThunk(
                 'x-api-key': apiKey
             }
         });
-        if (!response.ok) {
-            throw new Error("Could not fetch images");
-        }
+        if (!response.ok) throw new Error("Could not fetch images");
+
         const data = await response.json();
-        return data;
+
+        const trimmedData = data.map(image => ({
+            id: image.id,
+            url: image.url,
+            breed: image.breeds && image.breeds.length > 0 ? {
+                id: image.breeds[0].id,
+                name: image.breeds[0].name
+            } : null
+        }));
+
+        return trimmedData;
     }
 )

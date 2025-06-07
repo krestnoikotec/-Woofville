@@ -6,7 +6,7 @@ import Search from './pages/search/Search';
 import Favorites from "./pages/favorites/Favorites.jsx";
 import LogoIcon from "./components/icons/LogoIcon.jsx";
 import ThemeSwitcher from "./components/widgets/themeSwitcher/ThemeSwitcher.jsx";
-import MyButton from "./components/ui/button/MyButton.jsx";
+import MyButton from "./components/widgets/button/MyButton.jsx";
 import Header from "./components/layout/header/Header.jsx";
 import {useSelector} from "react-redux";
 import Menu from "./components/widgets/burgerMenu/Menu.jsx";
