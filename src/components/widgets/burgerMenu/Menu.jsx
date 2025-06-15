@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./menu.module.scss";
 import LoginIcon from "../../icons/LoginIcon.jsx";
 import ThemeSwitcher from "../themeSwitcher/ThemeSwitcher.jsx";
-import MyButton from "../button/MyButton.jsx";
+import MyButton from "../button/MyButton.tsx";
 import BurgerButton from "../burgerButton/BurgerButton.jsx";
 import {useDispatch} from "react-redux";
 import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";

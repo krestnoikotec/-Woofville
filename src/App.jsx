@@ -1,24 +1,25 @@
-import {useState} from 'react'
-import {Link, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import './App.scss'
-import About from "./pages/about/About.jsx";
-import Search from './pages/search/Search';
-import Favorites from "./pages/favorites/Favorites.jsx";
-import LogoIcon from "./components/icons/LogoIcon.jsx";
-import ThemeSwitcher from "./components/widgets/themeSwitcher/ThemeSwitcher.jsx";
-import MyButton from "./components/widgets/button/MyButton.jsx";
-import Header from "./components/layout/header/Header.jsx";
+import About from "@/pages/about/About.jsx";
+import Search from '@/pages/search/Search.jsx';
+import Favorites from "@/pages/favorites/Favorites.jsx";
+import Header from "@/components/layout/header/Header.jsx";
 import {useSelector} from "react-redux";
-import Menu from "./components/widgets/burgerMenu/Menu.jsx";
-import Footer from "./components/layout/footer/Footer.jsx";
+import Menu from "@/components/widgets/burgerMenu/Menu.jsx";
+import Footer from "@/components/layout/footer/Footer.jsx";
+import AuthForm from "@/components/widgets/authForm/AuthForm";
 
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
+  const isAuthOpen = useSelector(state => state.openAuth.isOpenAuth);
 
   return (
     <>
         {isBurgerOpen === true && (
             <Menu/>
+        )}
+        {isAuthOpen === true && (
+            <AuthForm/>
         )}
         <Header/>
         <Routes>

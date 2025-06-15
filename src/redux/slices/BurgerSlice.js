@@ -10,5 +10,5 @@ const burgerSlice = createSlice({
     },
 })
 
-export const {toggleBurger} = burgerSlice.actions;
+export const { toggleBurger} = burgerSlice.actions;
 export default burgerSlice.reducer;

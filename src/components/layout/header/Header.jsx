@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './header.module.scss';
-import MyButton from "../../widgets/button/MyButton.jsx";
+import MyButton from "../../widgets/button/MyButton.tsx";
 import LoginIcon from "../../icons/LoginIcon.jsx";
 import LogoIcon from "../../icons/LogoIcon.jsx";
 import {Link} from "react-router-dom";
@@ -8,6 +8,7 @@ import ThemeSwitcher from "../../widgets/themeSwitcher/ThemeSwitcher.jsx";
 import BurgerButton from "../../widgets/burgerButton/BurgerButton.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
+import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
 
 const Header = () => {
     const [isDesktop, setIsDesktop] = useState(true);
@@ -48,7 +49,7 @@ const Header = () => {
                     </nav>
                     <div className={styles.headerRightSide}>
                         <ThemeSwitcher />
-                        <button className={styles.headerAuthentication}>
+                        <button className={styles.headerAuthentication} onClick={() => dispatch(toggleOpenAuth())}>
                             <LoginIcon className={styles.headerLoginIcon} />
                             <p className={styles.headerLoginText}>LOG IN</p>
                         </button>
