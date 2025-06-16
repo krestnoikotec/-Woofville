@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './about.module.scss';
-import MyButton from "../../components/widgets/button/MyButton.tsx";
+import MyButton from "../../components/widgets/button/MyButton.jsx";
 import curlyDog from "@/assets/images/curlyDog.webp"
 import brownDog from "@/assets/images/brownDog.webp"
 import dogWithBeard from "@/assets/images/dogWithBeard.webp"

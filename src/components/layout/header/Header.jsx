@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styles from './header.module.scss';
-import MyButton from "../../widgets/button/MyButton.tsx";
+import MyButton from "../../widgets/button/MyButton.jsx";
 import LoginIcon from "../../icons/LoginIcon.jsx";
 import LogoIcon from "../../icons/LogoIcon.jsx";
 import {Link} from "react-router-dom";

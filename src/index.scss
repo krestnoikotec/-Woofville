@@ -12,7 +12,8 @@
   --icon-color: #aaaaaa;
   --menu-backgroung: rgba(39, 39, 39, 0.2);
   --comment-background: #315a7e;
-  --background-pattern: url("/background-pattern.webp")
+  --background-pattern: url("/background-pattern.webp");
+  --form-background: rgba(255, 255, 255, 0.05);
 }
 
 :root[data-theme='light'] {
@@ -29,7 +30,8 @@
   --icon-color: #474747;
   --menu-backgroung: rgba(255, 255, 255, 0.2);
   --comment-background: #5b8db8;
-  --background-pattern: url("/white-background-pattern.webp")
+  --background-pattern: url("/white-background-pattern.webp");
+  --form-background: rgba(0, 0, 0, 0.05);
 }
 
 @font-face {

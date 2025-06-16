@@ -1,4 +1,5 @@
 import {Route, Routes} from "react-router-dom";
+import { useEffect } from "react";
 import './App.scss'
 import About from "@/pages/about/About.jsx";
 import Search from '@/pages/search/Search.jsx';
@@ -7,11 +8,24 @@ import Header from "@/components/layout/header/Header.jsx";
 import {useSelector} from "react-redux";
 import Menu from "@/components/widgets/burgerMenu/Menu.jsx";
 import Footer from "@/components/layout/footer/Footer.jsx";
-import AuthForm from "@/components/widgets/authForm/AuthForm";
+import AuthForm from "@/components/widgets/authForm/AuthForm.jsx";
 
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
   const isAuthOpen = useSelector(state => state.openAuth.isOpenAuth);
+
+  useEffect(() => {
+      if (isAuthOpen) {
+          document.body.style.overflow = "hidden";
+      }
+      else{
+          document.body.style.overflow = "";
+      }
+
+      return () => {
+          document.body.style.overflow = "";
+      };
+  }, [isAuthOpen])
 
   return (
     <>

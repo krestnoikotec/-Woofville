@@ -3,7 +3,7 @@ import styles from "./search.module.scss";
 import { useDispatch } from "react-redux";
 import { fetchDogImages } from "@/redux/thunk/FetchDogsThunk.js";
 import DogCardList from "@/components/widgets/dogCardList/DogCardList.jsx";
-import MyButton from "@/components/widgets/button/MyButton.tsx";
+import MyButton from "@/components/widgets/button/MyButton.jsx";
 import Loader from "@/components/widgets/loader/Loader.jsx";
 
 const Search = () => {
