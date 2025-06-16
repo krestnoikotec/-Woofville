@@ -6,6 +6,7 @@ import MyButton from "../button/MyButton.jsx";
 import BurgerButton from "../burgerButton/BurgerButton.jsx";
 import {useDispatch} from "react-redux";
 import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
+import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
 
 const Menu = () => {
 
@@ -18,7 +19,7 @@ const Menu = () => {
                     <ThemeSwitcher/>
                     <BurgerButton/>
                 </div>
-                <div className={styles.menuAuthentication}>
+                <div className={styles.menuAuthentication} onClick={() => dispatch(toggleOpenAuth())}>
                     <LoginIcon className={styles.menuLoginIcon}/>
                     <p className={styles.menuLoginText}>LOG IN</p>
                 </div>
