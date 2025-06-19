@@ -1,0 +1,52 @@
+.authElement{
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: .2rem;
+}
+
+.authElementLabel{
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.authInput{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .2rem;
+  box-sizing: border-box;
+  padding: 0 .2rem;
+  background-color: #fff;
+  height: 2.2rem;
+  border-radius: .5rem;
+}
+
+.iconWrapper{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.authElementInput{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+}
+
+.authElementInput:focus{
+  outline: none;
+}
+
+.authElementInput::placeholder{
+  font-size: 1rem;
+}
+
+.authError{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #eb1515;
+  font-size: 1.2rem;
+}

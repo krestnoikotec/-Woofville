@@ -4,18 +4,19 @@ import MyButton from "@/components/widgets/button/MyButton.jsx";
 import styles from "./authForm.module.scss";
 import {useDispatch} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
-import ShowPasswordButton from "@/components/widgets/showPasswordButton/ShowPasswordButton.jsx";
 import AppleLogo from "@/components/icons/AppleLogo.jsx";
 import GoogleLogo from "@/components/icons/GoogleLogo.jsx";
 import LockSymbol from "@/components/icons/LockSymbol.jsx";
 import AtSymbol from "@/components/icons/AtSymbol.jsx";
 import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
+import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
 
 const AuthForm = () => {
     const dispatch = useDispatch();
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
     const [isSignIn, setIsSignIn] = useState(true);
 
     const {
@@ -45,10 +46,6 @@ const AuthForm = () => {
             };
     }, [dispatch]);
 
-    const showPassword = () => {
-        setIsPasswordVisible(!isPasswordVisible);
-    }
-
     const signInFields = [
         {
             name: "email",
@@ -56,6 +53,7 @@ const AuthForm = () => {
             icon: AtSymbol,
             placeholder: "Enter your Email",
             type: "text",
+            isPassword: false,
             rules: {
                 required: "This field is required",
                 pattern: {
@@ -67,12 +65,15 @@ const AuthForm = () => {
         {
             name: "password",
             label: "Password",
-            icon: LockSymbol,
+            icon: isPasswordVisible ? OpenLockSymbol : LockSymbol,
             placeholder: "Enter your Password",
             type: "password",
+            isPassword: true,
+            isPasswordVisible: isPasswordVisible,
+            toggleVisibility: () => setIsPasswordVisible((prev) => !prev),
             rules: {
                 required: "This field is required",
-                minLength: { value: 6, message: "minimum 6 symbols" },
+                minLength: { value: 6, message: "Minimum 6 symbols" },
                 pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
                     message: "Must contain letters and numbers",
@@ -88,6 +89,7 @@ const AuthForm = () => {
             icon: UserIcon,
             placeholder: "Enter your user name",
             type: "text",
+            isPassword: false,
             rules: {
                 required: "This field is required",
                 pattern: {
@@ -100,9 +102,12 @@ const AuthForm = () => {
         {
             name: "repeatPassword",
             label: "Repeat Password",
-            icon: LockSymbol,
+            icon: isRepeatPasswordVisible ? OpenLockSymbol : LockSymbol,
             placeholder: "Repeat your Password",
             type: "password",
+            isPassword: true,
+            isPasswordVisible: isRepeatPasswordVisible,
+            toggleVisibility: () => setIsRepeatPasswordVisible((prev) => !prev),
             rules: {
                 required: "This field is required",
                 validate: (value) => value === passwordValue || "Passwords do not match",
@@ -110,84 +115,63 @@ const AuthForm = () => {
         }
     ];
 
-    return (
-        <div className={styles.authContainer} onClick={() => dispatch(toggleOpenAuth())}>
-            {isSignIn ? (
-                <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm} onClick={(e) => e.stopPropagation()}>
-                    <div className={styles.authInfo}>
-                        {signInFields.map((field) => (
-                            <FormInput
-                                key={field.name}
-                                {...field}
-                                register={register}
-                                error={errors[field.name]}
-                                isPasswordVisible={isPasswordVisible}
-                            />
-                        ))}
+    return isSignIn ? (
+                <div className={styles.authContainer} onClick={() => dispatch(toggleOpenAuth())}>
+                    <div className={styles.authFormWrapper} onClick={(e) => e.stopPropagation()}>
+                        <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
+                            <div className={styles.authInfo}>
+                                {signInFields.map((field) => (
+                                    <FormInput
+                                        key={field.name}
+                                        {...field}
+                                        register={register}
+                                        error={errors[field.name]}
+                                        isPasswordVisible={field.isPasswordVisible}
+                                        isPassword={field.isPassword}
+                                        toggleVisibility={field.toggleVisibility}
+                                    />
+                                ))}
+                            </div>
 
-                        <div className={styles.authElement}>
-                            <label className={styles.authRemember}>
-                                <input
-                                    className={`${styles.authText} ${styles.authRemember}`}
-                                    type="checkbox" />
-                                Remember me
-                            </label>
-                            <ShowPasswordButton checked={isPasswordVisible} onClick={() => showPassword()}/>
+                            <MyButton type="submit">Sign In</MyButton>
+                        </form>
+                        <p className={styles.authText}>Don't have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign up now </a></p>
+                        <p className={styles.authText}>Or With</p>
+                        <div className={styles.authButtons} >
+                            <button className={styles.authButton}>
+                                <GoogleLogo/>
+                                Google</button>
+                            <button className={styles.authButton}>
+                                <AppleLogo/>
+                                Apple</button>
                         </div>
                     </div>
-
-                    <MyButton type="submit">Sign In</MyButton>
-
-                    <p className={styles.authText}>
-                        Don't have an account?
-                        <span className={`${styles.authText} ${styles.authLink}`}
-                              onClick={() => setIsSignIn(!isSignIn)}
-                        >
-                            Sign up now
-                        </span>
-                    </p>
-
-                    <p className={styles.authText}>Or With</p>
-
-                    <div className={styles.authButtons}>
-                        <button className={styles.authButton}>
-                            <GoogleLogo/>
-                            Google</button>
-                        <button className={styles.authButton}>
-                            <AppleLogo/>
-                            Apple</button>
-                    </div>
-                </form>
+                </div>
                 ) : (
-                <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm} onClick={(e) => e.stopPropagation()}>
-                    <div className={styles.authInfo}>
-                        {signUpFields.map((field) => (
-                            <FormInput
-                                key={field.name}
-                                {...field}
-                                register={register}
-                                error={errors[field.name]}
-                                isPasswordVisible={isPasswordVisible}
-                            />
-                        ))}
+                <div className={styles.authContainer} onClick={() => dispatch(toggleOpenAuth())}>
+                    <div className={styles.authFormWrapper} onClick={(e) => e.stopPropagation()}>
+                        <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
+                            <div className={styles.authInfo}>
+                                {signUpFields.map((field) => (
+                                    <FormInput
+                                        key={field.name}
+                                        {...field}
+                                        register={register}
+                                        error={errors[field.name]}
+                                        isPasswordVisible={field.isPasswordVisible}
+                                        isPassword={field.isPassword}
+                                        toggleVisibility={field.toggleVisibility}
+                                    />
+                                ))}
+                            </div>
 
-
-                        <div className={styles.authElement}>
-                            <label className={styles.authRemember}>
-                                <input
-                                    className={`${styles.authText} ${styles.authRemember}`}
-                                    type="checkbox" />
-                                Remember me
-                            </label>
-                            <ShowPasswordButton checked={isPasswordVisible} onClick={() => showPassword()}/>
-                        </div>
+                            <MyButton type="submit">Sign Up</MyButton>
+                        </form>
+                        <p className={styles.authText}>Already have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign in now </a></p>
                     </div>
-
-                    <MyButton type="submit">Sign Up</MyButton>
-                </form>
-            )}
-        </div>
-    );
+                </div>
+            )
+    ;
 };
 
 export default AuthForm;
