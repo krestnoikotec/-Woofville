@@ -4,15 +4,19 @@ import MyButton from "@/components/widgets/button/MyButton.jsx";
 import styles from "./authForm.module.scss";
 import {useDispatch} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
-import AppleLogo from "@/components/icons/AppleLogo.jsx";
+import AppleLogo from "@/components/icons/GitHubLogo.jsx";
 import GoogleLogo from "@/components/icons/GoogleLogo.jsx";
 import LockSymbol from "@/components/icons/LockSymbol.jsx";
 import AtSymbol from "@/components/icons/AtSymbol.jsx";
 import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
+import {loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
+import {setUser} from "@/redux/slices/UserSlice.js";
+import GitHubLogo from "@/components/icons/GitHubLogo.jsx";
 
 const AuthForm = () => {
+
     const dispatch = useDispatch();
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -22,13 +26,87 @@ const AuthForm = () => {
     const {
         register,
         handleSubmit,
+        setError,
         formState: { errors },
         watch,
     } = useForm();
 
-    const handleFormSubmit = (data) => {
-        console.log("Зареєстровано:", data);
+    const handleFormSubmit = async (data) => {
+        try{
+            const {email, password, userName} = data;
+
+            if(isSignIn){
+                const res = await loginUser(email, password);
+                console.log(res.user);
+                dispatch(setUser({
+                    email: res.user.email,
+                    uid: res.user.uid,
+                    displayName: res.user.displayName,
+                }));
+                dispatch(toggleOpenAuth())
+            } else {
+                const res = await registerUser(email, password, userName);
+                console.log(res.user);
+                dispatch(setUser({
+                    email: res.user.email,
+                    uid: res.user.uid,
+                    displayName: res.user.displayName,
+                }));
+                dispatch(toggleOpenAuth())
+            }
+        }
+        catch(err){
+            console.log("Error catch:", err);
+            switch(err.code) {
+                case "auth/user-not-found":
+                    setError("email", { type: "manual", message: "Account does not exist" });
+                    break;
+                case "auth/wrong-password":
+                    setError("password", { type: "manual", message: "Wrong password" });
+                    break;
+                case "auth/email-already-in-use":
+                    setError("email", { type: "manual", message: "This email is already registered" });
+                    break;
+                case "auth/invalid-credential":
+                    // Тут можеш показати загальне повідомлення, наприклад:
+                    setError("email", { type: "manual", message: "Invalid credentials provided" });
+                    break;
+                default:
+                    console.error("Unhandled error:", err);
+                // Можеш показати глобальне повідомлення про помилку, якщо хочеш
+            }
+        }
     };
+
+    const handleGoogleLogin = async () => {
+        try{
+            const res = await signInWithGoogle();
+
+            dispatch(setUser({
+                email: res.user.email,
+                uid: res.user.uid,
+                displayName: res.user.displayName,
+            }))
+        }
+        catch(err){
+            console.error(err);
+        }
+    }
+
+    const handleGitHubLogin = async () => {
+        try{
+            const res = await signInWithGitHub();
+
+            dispatch(setUser({
+                email: res.user.email,
+                uid: res.user.uid,
+                displayName: res.user.displayName,
+            }))
+        }
+        catch(err){
+            console.error(err);
+        }
+    }
 
     const passwordValue = watch("password");
 
@@ -76,7 +154,7 @@ const AuthForm = () => {
                 minLength: { value: 6, message: "Minimum 6 symbols" },
                 pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-                    message: "Must contain letters and numbers",
+                    message: "Must contain only letters and numbers",
                 },
             }
         }
@@ -135,15 +213,15 @@ const AuthForm = () => {
 
                             <MyButton type="submit">Sign In</MyButton>
                         </form>
-                        <p className={styles.authText}>Don't have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign up now </a></p>
+                        <p className={styles.authText}>Don't have an account? <a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}>Sign up now </a></p>
                         <p className={styles.authText}>Or With</p>
                         <div className={styles.authButtons} >
-                            <button className={styles.authButton}>
+                            <button className={styles.authButton} onClick={handleGoogleLogin}>
                                 <GoogleLogo/>
                                 Google</button>
-                            <button className={styles.authButton}>
-                                <AppleLogo/>
-                                Apple</button>
+                            <button className={styles.authButton} onClick={handleGitHubLogin}>
+                                <GitHubLogo/>
+                                GitHub</button>
                         </div>
                     </div>
                 </div>
@@ -170,8 +248,7 @@ const AuthForm = () => {
                         <p className={styles.authText}>Already have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign in now </a></p>
                     </div>
                 </div>
-            )
-    ;
+            );
 };
 
 export default AuthForm;

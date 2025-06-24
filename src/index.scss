@@ -14,6 +14,7 @@
   --comment-background: #315a7e;
   --background-pattern: url("/background-pattern.webp");
   --form-background: rgba(255, 255, 255, 0.05);
+  --lick-color: #8db3e9;
 }
 
 :root[data-theme='light'] {
@@ -32,6 +33,7 @@
   --comment-background: #5b8db8;
   --background-pattern: url("/white-background-pattern.webp");
   --form-background: rgba(0, 0, 0, 0.05);
+  --lick-color: #0e56bd;
 }
 
 @font-face {
