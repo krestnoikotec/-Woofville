@@ -56,7 +56,6 @@ const Search = () => {
 
                 const newStoredImages = [...storedImages, ...result];
                 sessionStorage.setItem("images", JSON.stringify(newStoredImages));
-                console.log(result);
         } catch (err) {
             setError(err.message || "Could not load more images");
         }

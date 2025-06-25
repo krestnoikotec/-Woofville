@@ -1,35 +1,82 @@
-import React from 'react';
-import styles from "./menu.module.scss";
-import LoginIcon from "../../icons/LoginIcon.jsx";
-import ThemeSwitcher from "../themeSwitcher/ThemeSwitcher.jsx";
-import MyButton from "../button/MyButton.jsx";
-import BurgerButton from "../burgerButton/BurgerButton.jsx";
-import {useDispatch} from "react-redux";
-import {toggleBurger} from "../../../redux/slices/BurgerSlice.js";
+import React, {useState} from 'react';
+import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
+import {motion} from "framer-motion";
+import {logoutUser} from "@/redux/slices/UserSlice.js";
+import {useDispatch, useSelector} from "react-redux";
+import styles from "./menu.module.scss";
+import LoginIcon from "@/components/icons/LoginIcon.jsx";
+import ThemeSwitcher from "@/components/widgets/themeSwitcher/ThemeSwitcher.jsx";
+import MyButton from "@/components/widgets/button/MyButton.jsx";
+import BurgerButton from "@/components/widgets/burgerButton/BurgerButton.jsx";
+import UserIcon from "@/components/icons/UserIcon.jsx";
+import {signOutUser} from "@/features/auth.js";
 
 const Menu = () => {
 
+    const isAuth = useSelector(state => state.user.isAuthenticated);
+    const userName = useSelector(state => state.user.displayName);
+
     const dispatch = useDispatch();
 
+    const isOpen = useSelector((state) => state.burger.isBurgerOpen);
+
+    const handleLogout = async () => {
+        try{
+            await signOutUser();
+            dispatch(logoutUser());
+            if(isOpen){
+                dispatch(toggleBurger());
+            }
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <div className={styles.menu} onClick={() => dispatch(toggleBurger())}>
+        <motion.div
+            className={styles.menu}
+            onClick={() => dispatch(toggleBurger())}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+        >
             <div className={styles.menuContainer} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.menuHead}>
                     <ThemeSwitcher/>
                     <BurgerButton/>
                 </div>
-                <div className={styles.menuAuthentication} onClick={() => dispatch(toggleOpenAuth())}>
-                    <LoginIcon className={styles.menuLoginIcon}/>
-                    <p className={styles.menuLoginText}>LOG IN</p>
+                {isAuth ? (
+                        <button className={styles.menuAuthentication}>
+                            <UserIcon className={styles.menuLoginIcon} height={48} width={48} strokeWidth={1.8}/>
+                            <p className={styles.menuLoginText}>{userName}</p>
+                        </button>
+                ) : (
+                    <button className={styles.menuAuthentication} onClick={() => dispatch(toggleOpenAuth())}>
+                        <LoginIcon className={styles.menuLoginIcon} />
+                        <p className={styles.menuLoginText}>LOG IN</p>
+                    </button>
+                )}
+                <div className={styles.userMenuButtContainer}>
+                    <nav className={styles.menuNavButtons}>
+                        <MyButton to="/" onClick={() => dispatch(toggleBurger())}>About</MyButton>
+                        <MyButton to="/search" onClick={() => dispatch(toggleBurger())}>Search</MyButton>
+                        <MyButton to="/favorites" onClick={() => dispatch(toggleBurger())}>Favorites</MyButton>
+                    </nav>
+                    <MyButton onClick={() => handleLogout()}>
+                        Logout
+                    </MyButton>
+                    <MyButton>
+                        Change user name
+                    </MyButton>
+                    <MyButton>
+                        Delete user
+                    </MyButton>
                 </div>
-                <nav className={styles.menuNavButtons}>
-                    <MyButton to="/" onClick={() => dispatch(toggleBurger())}>ABOUT</MyButton>
-                    <MyButton to="/search" onClick={() => dispatch(toggleBurger())}>SEARCH</MyButton>
-                    <MyButton to="/favorites" onClick={() => dispatch(toggleBurger())}>FAVORITES</MyButton>
-                </nav>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

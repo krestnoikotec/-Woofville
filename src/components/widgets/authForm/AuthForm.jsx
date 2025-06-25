@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
 import {useEffect, useState} from "react";
-import MyButton from "@/components/widgets/button/MyButton.jsx";
-import styles from "./authForm.module.scss";
+import {loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
+import {setUser} from "@/redux/slices/UserSlice.js";
 import {useDispatch} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
-import AppleLogo from "@/components/icons/GitHubLogo.jsx";
+import {motion} from "framer-motion";
+import styles from "./authForm.module.scss";
+import MyButton from "@/components/widgets/button/MyButton.jsx";
 import GoogleLogo from "@/components/icons/GoogleLogo.jsx";
 import LockSymbol from "@/components/icons/LockSymbol.jsx";
 import AtSymbol from "@/components/icons/AtSymbol.jsx";
 import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
-import {loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
-import {setUser} from "@/redux/slices/UserSlice.js";
 import GitHubLogo from "@/components/icons/GitHubLogo.jsx";
 
 const AuthForm = () => {
@@ -36,7 +36,7 @@ const AuthForm = () => {
             const {email, password, userName} = data;
 
             if(isSignIn){
-                const res = await loginUser(email, password);
+                const res = await loginUser(email, password, userName);
                 console.log(res.user);
                 dispatch(setUser({
                     email: res.user.email,
@@ -87,6 +87,7 @@ const AuthForm = () => {
                 uid: res.user.uid,
                 displayName: res.user.displayName,
             }))
+            dispatch(toggleOpenAuth())
         }
         catch(err){
             console.error(err);
@@ -102,6 +103,7 @@ const AuthForm = () => {
                 uid: res.user.uid,
                 displayName: res.user.displayName,
             }))
+            dispatch(toggleOpenAuth())
         }
         catch(err){
             console.error(err);
@@ -193,61 +195,76 @@ const AuthForm = () => {
         }
     ];
 
-    return isSignIn ? (
-                <div className={styles.authContainer} onClick={() => dispatch(toggleOpenAuth())}>
-                    <div className={styles.authFormWrapper} onClick={(e) => e.stopPropagation()}>
-                        <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
-                            <div className={styles.authInfo}>
-                                {signInFields.map((field) => (
-                                    <FormInput
-                                        key={field.name}
-                                        {...field}
-                                        register={register}
-                                        error={errors[field.name]}
-                                        isPasswordVisible={field.isPasswordVisible}
-                                        isPassword={field.isPassword}
-                                        toggleVisibility={field.toggleVisibility}
-                                    />
-                                ))}
-                            </div>
+    return (
+                <motion.div
+                    className={styles.authContainer}
+                    onClick={() => dispatch(toggleOpenAuth())}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    exit={{opacity: 0}}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                >
+                    <motion.div
+                        className={styles.authFormWrapper}
+                        onClick={(e) => e.stopPropagation()}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
+                    >
+                        {isSignIn ? (<>
+                            <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
+                                <div className={styles.authInfo}>
+                                    {signInFields.map((field) => (
+                                        <FormInput
+                                            key={field.name}
+                                            {...field}
+                                            register={register}
+                                            error={errors[field.name]}
+                                            isPasswordVisible={field.isPasswordVisible}
+                                            isPassword={field.isPassword}
+                                            toggleVisibility={field.toggleVisibility}
+                                        />
+                                    ))}
+                                </div>
 
-                            <MyButton type="submit">Sign In</MyButton>
-                        </form>
-                        <p className={styles.authText}>Don't have an account? <a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}>Sign up now </a></p>
-                        <p className={styles.authText}>Or With</p>
-                        <div className={styles.authButtons} >
-                            <button className={styles.authButton} onClick={handleGoogleLogin}>
-                                <GoogleLogo/>
-                                Google</button>
-                            <button className={styles.authButton} onClick={handleGitHubLogin}>
-                                <GitHubLogo/>
-                                GitHub</button>
-                        </div>
-                    </div>
-                </div>
-                ) : (
-                <div className={styles.authContainer} onClick={() => dispatch(toggleOpenAuth())}>
-                    <div className={styles.authFormWrapper} onClick={(e) => e.stopPropagation()}>
-                        <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
-                            <div className={styles.authInfo}>
-                                {signUpFields.map((field) => (
-                                    <FormInput
-                                        key={field.name}
-                                        {...field}
-                                        register={register}
-                                        error={errors[field.name]}
-                                        isPasswordVisible={field.isPasswordVisible}
-                                        isPassword={field.isPassword}
-                                        toggleVisibility={field.toggleVisibility}
-                                    />
-                                ))}
+                                <MyButton type="submit">Sign In</MyButton>
+                            </form>
+                            <p className={styles.authText}>Don't have an account? <a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}>Sign up now </a></p>
+                            <p className={styles.authText}>Or With</p>
+                            <div className={styles.authButtons} >
+                                <button className={styles.authButton} onClick={handleGoogleLogin}>
+                                    <GoogleLogo/>
+                                    Google</button>
+                                <button className={styles.authButton} onClick={handleGitHubLogin}>
+                                    <GitHubLogo/>
+                                    GitHub</button>
                             </div>
+                        </>) : (
+                            <>
+                                <form onSubmit={handleSubmit(handleFormSubmit)} className={styles.authForm}>
+                                    <div className={styles.authInfo}>
+                                        {signUpFields.map((field) => (
+                                            <FormInput
+                                                key={field.name}
+                                                {...field}
+                                                register={register}
+                                                error={errors[field.name]}
+                                                isPasswordVisible={field.isPasswordVisible}
+                                                isPassword={field.isPassword}
+                                                toggleVisibility={field.toggleVisibility}
+                                            />
+                                        ))}
+                                    </div>
 
-                            <MyButton type="submit">Sign Up</MyButton>
-                        </form>
-                        <p className={styles.authText}>Already have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign in now </a></p>
-                    </div>
-                </div>
+                                    <MyButton type="submit">Sign Up</MyButton>
+                                </form>
+                                <p className={styles.authText}>Already have an account?<a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}> Sign in now </a></p>
+
+                            </>
+                        )}
+                    </motion.div>
+                </motion.div>
             );
 };
 

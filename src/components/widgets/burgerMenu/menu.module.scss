@@ -32,6 +32,8 @@
   text-decoration: none;
   cursor: pointer;
   display: inline-block;
+  border: none;
+  background-color: transparent;
 
   .menuLoginIcon{
     height: 3rem;
@@ -52,6 +54,12 @@
 }
 
 .menuNavButtons{
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.userMenuButtContainer{
   display: flex;
   flex-direction: column;
   gap: 13px;

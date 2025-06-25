@@ -6,10 +6,11 @@ import Search from '@/pages/search/Search.jsx';
 import Favorites from "@/pages/favorites/Favorites.jsx";
 import Header from "@/components/layout/header/Header.jsx";
 import {useDispatch, useSelector} from "react-redux";
+import {checkUserAuth} from "@/features/auth.js";
+import {AnimatePresence} from "framer-motion";
 import Menu from "@/components/widgets/burgerMenu/Menu.jsx";
 import Footer from "@/components/layout/footer/Footer.jsx";
 import AuthForm from "@/components/widgets/authForm/AuthForm.jsx";
-import {checkUserAuth} from "@/features/auth.js";
 
 function App() {
   const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
@@ -36,12 +37,16 @@ function App() {
 
   return (
     <>
-        {isBurgerOpen === true && (
-            <Menu/>
-        )}
-        {isAuthOpen === true && (
-            <AuthForm/>
-        )}
+        <AnimatePresence mode="wait">
+            {isBurgerOpen === true && (
+                <Menu/>
+            )}
+        </AnimatePresence>
+        <AnimatePresence mode="wait">
+            {isAuthOpen === true && (
+                <AuthForm/>
+            )}
+        </AnimatePresence>
         <Header/>
         <Routes>
             <Route path="/" element={<About/>}></Route>
