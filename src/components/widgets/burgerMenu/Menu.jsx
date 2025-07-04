@@ -16,26 +16,23 @@ const Menu = () => {
 
     const isAuth = useSelector(state => state.user.isAuthenticated);
     const userName = useSelector(state => state.user.displayName);
+    const isOpen = useSelector((state) => state.burger.isBurgerOpen);
 
     const dispatch = useDispatch();
 
-    const isOpen = useSelector((state) => state.burger.isBurgerOpen);
 
     const handleLogout = async () => {
         try{
             await signOutUser();
             dispatch(logoutUser());
+            if(isOpen) {
+                dispatch(toggleBurger());
+            }
         }
         catch (error) {
             console.log(error);
         }
     }
-
-    React.useEffect(() => {
-        if(isOpen) {
-            dispatch(toggleBurger());
-        }
-    }, [isAuth]);
 
     return (
         <motion.div

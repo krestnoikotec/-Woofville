@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import {useEffect, useState} from "react";
 import {loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
 import {setUser} from "@/redux/slices/UserSlice.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
 import {motion} from "framer-motion";
 import styles from "./authForm.module.scss";
@@ -14,10 +14,13 @@ import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
 import GitHubLogo from "@/components/icons/GitHubLogo.jsx";
+import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
 
 const AuthForm = () => {
 
     const dispatch = useDispatch();
+
+    const isOpen = useSelector((state) => state.burger.isBurgerOpen);
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const [isRepeatPasswordVisible, setIsRepeatPasswordVisible] = useState(false);
@@ -88,6 +91,9 @@ const AuthForm = () => {
                 displayName: res.user.displayName,
             }))
             dispatch(toggleOpenAuth())
+            if(isOpen) {
+                dispatch(toggleBurger());
+            }
         }
         catch(err){
             console.error(err);
@@ -105,6 +111,9 @@ const AuthForm = () => {
                 displayName: res.user.displayName,
             }));
             dispatch(toggleOpenAuth());
+            if(isOpen) {
+                dispatch(toggleBurger());
+            }
         } catch (err) {
             console.error("GitHub Login Failed:", err);
             alert(err.message);
