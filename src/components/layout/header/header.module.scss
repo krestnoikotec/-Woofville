@@ -63,6 +63,10 @@
 
 .headerLoginText{
   @extend .text-style;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .headerLogoIcon{

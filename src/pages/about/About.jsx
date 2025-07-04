@@ -1,4 +1,5 @@
 import React from 'react';
+import {motion} from 'framer-motion';
 import styles from './about.module.scss';
 import MyButton from "../../components/widgets/button/MyButton.jsx";
 import curlyDog from "@/assets/images/curlyDog.webp"
@@ -9,7 +10,6 @@ import dogWithGlasses from "@/assets/images/dogWithGlasses.webp"
 import dogWithOpenMouth from "@/assets/images/dogWithOpenMouth.webp"
 import happyDog from "@/assets/images/happyDog.webp"
 import userPhoto from "@/assets/images/userPhoto.webp"
-import {motion} from 'framer-motion';
 
 const listItems = [
     {
@@ -111,6 +111,7 @@ const About = () => {
                         <p className={styles.statLabel}>Join Our Community</p>
                     </motion.div>
                     <motion.img
+                        loading="lazy"
                         custom={2}
                         variants={scrollAnimation}
                         {...animation}
@@ -155,6 +156,7 @@ const About = () => {
                         )})}
                     </motion.ul>
                     <motion.img
+                        loading="lazy"
                         custom={1}
                         variants={scrollAnimation}
                         {...animation}
@@ -187,6 +189,7 @@ const About = () => {
                     </div>
                     <div className={styles.galleryPhotoGroup}>
                         <motion.img
+                            loading="lazy"
                             variants={scrollAnimation}
                             {...animation}
                             viewport={{once: true}}
@@ -195,6 +198,7 @@ const About = () => {
                             className={styles.photoFirst}
                         />
                         <motion.img
+                            loading="lazy"
                             variants={scrollAnimation}
                             {...animation}
                             viewport={{once: true}}
@@ -203,6 +207,7 @@ const About = () => {
                             className={styles.photoSecond}
                         />
                         <motion.img
+                            loading="lazy"
                             custom={.5}
                             variants={scrollAnimation}
                             {...animation}
@@ -212,6 +217,7 @@ const About = () => {
                             className={styles.photoThird}
                         />
                         <motion.img
+                            loading="lazy"
                             custom={.5}
                             variants={scrollAnimation}
                             {...animation}
@@ -231,6 +237,7 @@ const About = () => {
             >
                 <div className={styles.commentContent}>
                     <img
+                        loading="lazy"
                         src={brownDog}
                         alt="Brown dog with a dark muzzle looking to the side."
                         className={styles.commentImage}
@@ -260,6 +267,7 @@ const About = () => {
                             viewport={{once: true}}
                             className={styles.commentUser}>
                             <img
+                                loading="lazy"
                                 src={userPhoto}
                                 alt="Small brown puppy with a white spot."
                                 className={styles.userImage}

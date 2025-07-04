@@ -95,20 +95,21 @@ const AuthForm = () => {
     }
 
     const handleGitHubLogin = async () => {
-        try{
+        try {
             const res = await signInWithGitHub();
+            if (!res?.user) return;
 
             dispatch(setUser({
                 email: res.user.email,
                 uid: res.user.uid,
                 displayName: res.user.displayName,
-            }))
-            dispatch(toggleOpenAuth())
+            }));
+            dispatch(toggleOpenAuth());
+        } catch (err) {
+            console.error("GitHub Login Failed:", err);
+            alert(err.message);
         }
-        catch(err){
-            console.error(err);
-        }
-    }
+    };
 
     const passwordValue = watch("password");
 

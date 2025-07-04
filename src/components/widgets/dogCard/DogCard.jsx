@@ -1,13 +1,25 @@
 import React from 'react';
 import styles from './dogCard.module.scss';
 
-const DogCard = ({ url, breed, toggleFavorites}) => {
+const DogCard = ({ url, breed, bred_for, temperament, life_span, origin, toggleFavorites}) => {
     return (
         <div className={styles.card}>
             <div className={styles.cardWrapper}>
-                <img className={styles.cardImg} src={url} alt={breed}/>
+                <img loading="lazy" className={styles.cardImg} src={url} alt={breed}/>
                 {breed && (<p className={styles.cardDescription}>
                     {breed}
+                </p>)}
+                {bred_for && (<p className={styles.cardDescription}>
+                    {bred_for}
+                </p>)}
+                {temperament && (<p className={styles.cardDescription}>
+                    {temperament}
+                </p>)}
+                {life_span && (<p className={styles.cardDescription}>
+                    {life_span}
+                </p>)}
+                {origin && (<p className={styles.cardDescription}>
+                    {origin}
                 </p>)}
                 <div className={styles.heartContainer} title="Like">
                     <input

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
 import {Link} from "react-router-dom";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
+import {AnimatePresence} from "framer-motion";
 import styles from './header.module.scss';
 import MyButton from "@/components/widgets/button/MyButton.jsx";
 import LoginIcon from "@/components/icons/LoginIcon.jsx";
@@ -75,9 +76,11 @@ const Header = () => {
                             </button>
                         )}
                     </div>
-                    {isUserMenuOpen && (
-                        <UserMenu closeMenu={closeUserMenu}/>
-                    )}
+                    <AnimatePresence mode="wait">
+                        {isUserMenuOpen && (
+                                <UserMenu closeMenu={closeUserMenu}/>
+                        )}
+                    </AnimatePresence>
                 </>
             )}
             {!isDesktop && (

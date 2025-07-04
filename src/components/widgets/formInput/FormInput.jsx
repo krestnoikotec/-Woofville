@@ -8,10 +8,10 @@ const FormInput = ({ name, label, icon: Icon, rules, placeholder, type, register
             <div className={styles.authInput}>
                 {isPassword ? (
                     <div className={styles.iconWrapper} onClick={toggleVisibility}>
-                        <Icon />
+                        <Icon color="black" />
                     </div>
                 ) : (
-                    <Icon />
+                    <Icon color="black" />
                 )}
                 <input
                     className={styles.authElementInput}

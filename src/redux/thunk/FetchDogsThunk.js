@@ -17,7 +17,11 @@ export const fetchDogImages = createAsyncThunk(
             url: image.url,
             breed: image.breeds && image.breeds.length > 0 ? {
                 id: image.breeds[0].id,
-                name: image.breeds[0].name
+                name: image.breeds[0].name,
+                bred_for: image.breeds[0].bred_for,
+                temperament: image.breeds[0].temperament,
+                life_span: image.breeds[0].life_span,
+                origin: image.breeds[0].origin
             } : null
         }));
 

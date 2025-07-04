@@ -1,13 +1,13 @@
 import {Route, Routes} from "react-router-dom";
 import { useEffect } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {checkUserAuth} from "@/features/auth.js";
+import {AnimatePresence} from "framer-motion";
 import './App.scss'
 import About from "@/pages/about/About.jsx";
 import Search from '@/pages/search/Search.jsx';
 import Favorites from "@/pages/favorites/Favorites.jsx";
 import Header from "@/components/layout/header/Header.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import {checkUserAuth} from "@/features/auth.js";
-import {AnimatePresence} from "framer-motion";
 import Menu from "@/components/widgets/burgerMenu/Menu.jsx";
 import Footer from "@/components/layout/footer/Footer.jsx";
 import AuthForm from "@/components/widgets/authForm/AuthForm.jsx";

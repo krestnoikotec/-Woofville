@@ -25,14 +25,17 @@ const Menu = () => {
         try{
             await signOutUser();
             dispatch(logoutUser());
-            if(isOpen){
-                dispatch(toggleBurger());
-            }
         }
         catch (error) {
             console.log(error);
         }
     }
+
+    React.useEffect(() => {
+        if(isOpen) {
+            dispatch(toggleBurger());
+        }
+    }, [isAuth]);
 
     return (
         <motion.div
@@ -65,15 +68,11 @@ const Menu = () => {
                         <MyButton to="/search" onClick={() => dispatch(toggleBurger())}>Search</MyButton>
                         <MyButton to="/favorites" onClick={() => dispatch(toggleBurger())}>Favorites</MyButton>
                     </nav>
-                    <MyButton onClick={() => handleLogout()}>
-                        Logout
-                    </MyButton>
-                    <MyButton>
-                        Change user name
-                    </MyButton>
-                    <MyButton>
-                        Delete user
-                    </MyButton>
+                    {isAuth && (<>
+                        <MyButton onClick={() => handleLogout()}>
+                            Logout
+                        </MyButton>
+                    </>)}
                 </div>
             </div>
         </motion.div>

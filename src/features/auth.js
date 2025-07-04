@@ -7,6 +7,8 @@ import {
     onAuthStateChanged,
     GoogleAuthProvider,
     GithubAuthProvider,
+    fetchSignInMethodsForEmail,
+    linkWithCredential,
     signInWithPopup
 } from "firebase/auth";
 import {setUser, logoutUser} from "@/redux/slices/UserSlice.js";
@@ -28,15 +30,29 @@ export const loginUser = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    return await signInWithPopup(auth, provider);
-}
-
 export const signInWithGitHub = async () => {
     const provider = new GithubAuthProvider();
-    return await signInWithPopup(auth, provider);
-}
+    try {
+        return await signInWithPopup(auth, provider);
+    } catch (error) {
+        if (error.code === "auth/account-exists-with-different-credential") {
+            throw new Error("Account exists with a different sign-in method.");
+        }
+        throw error;
+    }
+};
+
+export const signInWithGoogle = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+        return await signInWithPopup(auth, provider);
+    } catch (error) {
+        if (error.code === "auth/account-exists-with-different-credential") {
+            throw new Error("Account exists with a different sign-in method.");
+        }
+        throw error;
+    }
+};
 
 export const signOutUser = async () => {
     return await signOut(auth);
