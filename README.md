@@ -15,7 +15,6 @@ Repo: [GitHub](https://github.com/krestnoikotec/-Woofville)
 - [🛠️ Getting Started](#️-getting-started)
 - [📁 Project Structure](#-project-structure)
 - [🔗 Firebase Setup](#-firebase-setup)
-- [🗄️ How Likes Are Stored in Firebase](#️-how-likes-are-stored-in-firebase)
 - [📜 License](#-license)
 - [✨ Author](#-author)
 
