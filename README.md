@@ -15,6 +15,7 @@ Repo: [GitHub](https://github.com/krestnoikotec/-Woofville)
 - [🛠️ Getting Started](#️-getting-started)
 - [📁 Project Structure](#-project-structure)
 - [🔗 Firebase Setup](#-firebase-setup)
+- [🗄️ How Likes Are Stored in Firebase](#️-how-likes-are-stored-in-firebase)
 - [📜 License](#-license)
 - [✨ Author](#-author)
 
@@ -47,19 +48,32 @@ Repo: [GitHub](https://github.com/krestnoikotec/-Woofville)
 ## 🛠️ Getting Started
 
 ### 1. Clone the project
+```bash
 git clone https://github.com/krestnoikotec/-Woofville.git
 cd Woofville
-2. Install dependencies
-npm install
-or
-yarn install
-3. Run development server
-npm run dev
-or
-yarn dev
-Visit http://localhost:5173 to view the app.
+```
 
-📁 Project Structure
+### 2. Install dependencies
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Run development server
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Visit `http://localhost:5173` to view the app.
+
+---
+
+## 📁 Project Structure
+
+```
 src/
 ├── assets/            # Static images & styles
 ├── components/        # Reusable UI components
@@ -68,17 +82,20 @@ src/
 ├── redux/             # Redux slices & store config
 ├── utils/             # Helper functions
 └── main.jsx           # App entry point
-🔗 Firebase Setup
+```
+
+---
+
+## 🔗 Firebase Setup
+
 To run the project with your own Firebase instance:
 
-Create a Firebase project at firebase.google.com
+1. Create a Firebase project at [firebase.google.com](https://firebase.google.com/)
+2. Enable Authentication → Email/Password
+3. Enable Realtime Database
+4. Add your Firebase config to `firebase-config.js` inside `/features`
 
-Enable Authentication → Email/Password
-
-Enable Realtime Database
-
-Add your Firebase config to firebase-config.js inside /features
-
+```js
 // /features/firebase-config.js
 const firebaseConfig = {
   apiKey: "...",
@@ -86,9 +103,41 @@ const firebaseConfig = {
   databaseURL: "...",
   ...
 };
+```
 
-📜 License
-This project is open-source under the MIT License.
+---
 
-✨ Author
-Created with 💻 and 🐶 by krestnoikotec
+## 🗄️ How Likes Are Stored in Firebase
+
+The like system is implemented per authenticated user. The Firebase Realtime Database structure looks like this:
+
+```
+usersLikes/
+├── userId1/
+│   ├── imageURL1: true
+│   ├── imageURL2: true
+├── userId2/
+│   ├── imageURL3: true
+```
+
+- Each user has their own object under `usersLikes`
+- Every key is the `imageURL` of a liked dog image
+- Value is simply `true`
+- To "unlike", the corresponding entry is removed
+
+This allows:
+- 🔄 Syncing likes across devices
+- 👁️ Displaying already-liked images
+- 🔘 Toggling like/unlike in real time
+
+---
+
+## 📜 License
+
+This project is open-source under the [MIT License](./LICENSE).
+
+---
+
+## ✨ Author
+
+Created with 💻 and 🐶 by [krestnoikotec](https://github.com/krestnoikotec)
