@@ -109,26 +109,41 @@ const firebaseConfig = {
 
 ## 🗄️ How Likes Are Stored in Firebase
 
-The like system is implemented per authenticated user. The Firebase Realtime Database structure looks like this:
+All liked dog photos are stored under the `likedDogs` node in Firebase Realtime Database.
+
+### ✅ Structure Example
 
 ```
-usersLikes/
+likedDogs/
 ├── userId1/
-│   ├── imageURL1: true
-│   ├── imageURL2: true
+│   ├── 36TXlWMDf/
+│   │   ├── id: "36TXlWMDf"
+│   │   ├── name: "Akita"
+│   │   ├── url: "https://cdn2.thedogapi.com/images/36TXlWMDf.jpg"
+│   │   ├── breed: { ... }
+│   │   ├── temperament: "Docile, Alert, Responsive, ..."
+│   │   └── ...more dog data
 ├── userId2/
-│   ├── imageURL3: true
+│   ├── SkM9sec47/
+│   │   └── ...
 ```
 
-- Each user has their own object under `usersLikes`
-- Every key is the `imageURL` of a liked dog image
-- Value is simply `true`
-- To "unlike", the corresponding entry is removed
+Each user has their own nested object with:
 
-This allows:
-- 🔄 Syncing likes across devices
-- 👁️ Displaying already-liked images
-- 🔘 Toggling like/unlike in real time
+- 🔑 Dog IDs as keys
+- 📦 Full dog metadata as value (name, photo, breed, life span, etc.)
+
+### ➕ Adding a like:
+You save the dog’s full data object under `likedDogs/{userId}/{dogId}`
+
+### ➖ Removing a like:
+You remove the corresponding dog entry from `likedDogs/{userId}/{dogId}`
+
+### 🧠 Benefit of this structure:
+
+- Fast access to liked photos and dog data in one request
+- Avoids additional API fetches when rendering favorites
+- Easily expandable if you want to store more fields (e.g., date liked, tags, etc.)
 
 ---
 
