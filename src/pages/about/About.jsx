@@ -10,6 +10,7 @@ import dogWithGlasses from "@/assets/images/dogWithGlasses.webp"
 import dogWithOpenMouth from "@/assets/images/dogWithOpenMouth.webp"
 import happyDog from "@/assets/images/happyDog.webp"
 import userPhoto from "@/assets/images/userPhoto.webp"
+import {getUserCount} from "@/features/auth.js";
 
 const listItems = [
     {
@@ -44,6 +45,19 @@ const animation = {
 }
 
 const About = () => {
+    const [userCount, setUserCount] = React.useState(null);
+
+    React.useEffect(() => {
+        const fetchUserCount = async () => {
+            try{
+                const count = await getUserCount();
+                setUserCount(count);
+            } catch(err){
+                console.log(err);
+            }
+        }
+        fetchUserCount();
+    }, [])
 
     return (
         <div className={styles.aboutPage}>
@@ -107,7 +121,7 @@ const About = () => {
                         {...animation}
                         viewport={{once: true}}
                         className={`${styles.statItem} ${styles.statsSecond}`}>
-                        <h3 className={styles.statNumber}>15</h3>
+                        <h3 className={styles.statNumber}>{userCount}</h3>
                         <p className={styles.statLabel}>Join Our Community</p>
                     </motion.div>
                     <motion.img

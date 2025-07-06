@@ -1,10 +1,11 @@
 import { useForm } from "react-hook-form";
 import {useEffect, useState} from "react";
-import {loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
+import {incrementUsersCount, loginUser, registerUser, signInWithGitHub, signInWithGoogle} from "@/features/auth.js";
 import {setUser} from "@/redux/slices/UserSlice.js";
 import {useDispatch, useSelector} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
 import {motion} from "framer-motion";
+import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
 import styles from "./authForm.module.scss";
 import MyButton from "@/components/widgets/button/MyButton.jsx";
 import GoogleLogo from "@/components/icons/GoogleLogo.jsx";
@@ -14,7 +15,7 @@ import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
 import GitHubLogo from "@/components/icons/GitHubLogo.jsx";
-import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
+import {getAdditionalUserInfo} from "firebase/auth";
 
 const AuthForm = () => {
 
@@ -47,6 +48,9 @@ const AuthForm = () => {
                     displayName: res.user.displayName,
                 }));
                 dispatch(toggleOpenAuth())
+                if(isOpen) {
+                    dispatch(toggleBurger());
+                }
             } else {
                 const res = await registerUser(email, password, userName);
                 console.log(res.user);
@@ -56,6 +60,14 @@ const AuthForm = () => {
                     displayName: res.user.displayName,
                 }));
                 dispatch(toggleOpenAuth())
+                if(isOpen) {
+                    dispatch(toggleBurger());
+                }
+                try {
+                    await incrementUsersCount();
+                } catch (e) {
+                    console.error("Не вдалось інкрементити користувачів:", e);
+                }
             }
         }
         catch(err){
@@ -71,12 +83,10 @@ const AuthForm = () => {
                     setError("email", { type: "manual", message: "This email is already registered" });
                     break;
                 case "auth/invalid-credential":
-                    // Тут можеш показати загальне повідомлення, наприклад:
                     setError("email", { type: "manual", message: "Invalid credentials provided" });
                     break;
                 default:
                     console.error("Unhandled error:", err);
-                // Можеш показати глобальне повідомлення про помилку, якщо хочеш
             }
         }
     };
@@ -84,7 +94,14 @@ const AuthForm = () => {
     const handleGoogleLogin = async () => {
         try{
             const res = await signInWithGoogle();
-
+            const { isNewUser } = getAdditionalUserInfo(res);
+            if (isNewUser) {
+                try {
+                    await incrementUsersCount();
+                } catch (e) {
+                    console.error("Не вдалось інкрементити користувачів:", e);
+                }
+            }
             dispatch(setUser({
                 email: res.user.email,
                 uid: res.user.uid,
@@ -103,6 +120,14 @@ const AuthForm = () => {
     const handleGitHubLogin = async () => {
         try {
             const res = await signInWithGitHub();
+            const { isNewUser } = getAdditionalUserInfo(res);
+            if (isNewUser) {
+                try {
+                    await incrementUsersCount();
+                } catch (e) {
+                    console.error("Не вдалось інкрементити користувачів:", e);
+                }
+            }
             if (!res?.user) return;
 
             dispatch(setUser({

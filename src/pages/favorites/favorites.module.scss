@@ -1,0 +1,25 @@
+
+.favoritesWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoritesText {
+  padding: .5rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  justify-content: center;
+  background-color: var(--color);
+  color: var(--background-color);
+  border-radius: 1rem;
+  margin: .5rem;
+}
+
+@media (max-width: 800px) {
+  .favoritesWrapper {
+    min-height: 50vh;
+  }
+}

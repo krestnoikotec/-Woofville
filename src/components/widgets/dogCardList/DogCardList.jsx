@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "./dogCardList.module.scss"
 import DogCard from "@/components/widgets/dogCard/DogCard.jsx";
 
-const DogCardList = ( { images } ) => {
+const DogCardList = ( { images, likedDogs, onToggleLike } ) => {
     return (
         <div className={styles.cardList}>
             {images.map((image) => (
@@ -14,6 +14,8 @@ const DogCardList = ( { images } ) => {
                     temperament={image.breed?.temperament}
                     life_span={image.breed?.life_span}
                     origin={image.breed?.origin}
+                    liked={!!likedDogs[image.id]}
+                    onToggleLike={() => onToggleLike(image, !!likedDogs[image.id])}
                 />
             ))}
         </div>

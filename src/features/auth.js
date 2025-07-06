@@ -7,12 +7,11 @@ import {
     onAuthStateChanged,
     GoogleAuthProvider,
     GithubAuthProvider,
-    fetchSignInMethodsForEmail,
-    linkWithCredential,
     signInWithPopup
 } from "firebase/auth";
+import { ref, runTransaction, get} from "firebase/database";
 import {setUser, logoutUser} from "@/redux/slices/UserSlice.js";
-import app from "@/firebase";
+import { app, db} from "@/firebase";
 
 const auth = getAuth(app);
 
@@ -58,17 +57,6 @@ export const signOutUser = async () => {
     return await signOut(auth);
 }
 
-export const changeName = async (userName) => {
-    const user = auth.currentUser;
-    if (!user) throw new Error("No authenticated user");
-
-    await updateProfile(user,{
-        displayName: userName,
-    });
-
-    return user;
-}
-
 export const checkUserAuth = (dispatch) => {
     onAuthStateChanged(auth, (user) => {
         if (user) {
@@ -82,4 +70,23 @@ export const checkUserAuth = (dispatch) => {
             dispatch(logoutUser());
         }
     })
+}
+
+export const incrementUsersCount = async () => {
+    const userCountRef = ref(db, "userCount");
+    await runTransaction(userCountRef, (count) => {
+        return (count || 0) + 1;
+    });
+}
+
+export const getUserCount = async () => {
+    const userCountRef = ref(db, "userCount");
+    const snapshot = await get(userCountRef);
+
+    if(snapshot.exists()){
+        return snapshot.val();
+    }
+    else{
+        return 0;
+    }
 }
