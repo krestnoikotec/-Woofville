@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useDispatch} from "react-redux";
 import {motion} from "framer-motion";
 import {signOutUser} from "@/features/auth.js";
@@ -9,9 +9,9 @@ import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 
 const UserMenu = ({closeMenu}) => {
 
-    const [changedUser, setChangedUser] = React.useState(false);
-
     const dispatch = useDispatch();
+
+    const menuRef = useRef(null);
 
     const handleLogout = async () => {
         try{
@@ -24,10 +24,22 @@ const UserMenu = ({closeMenu}) => {
         }
     }
 
+    React.useEffect(() => {
+        const handleClick = (e) => {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                closeMenu();
+            }
+        };
 
+        document.addEventListener("mousedown", handleClick);
+        return () => {
+            document.removeEventListener("mousedown", handleClick);
+        };
+    }, [closeMenu]);
 
     return (
         <motion.div
+            ref={menuRef}
             className={styles.userMenuContainer}
             initial={{ opacity: 0}}
             animate={{ opacity: 1}}
