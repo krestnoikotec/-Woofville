@@ -51,11 +51,11 @@ git clone https://github.com/krestnoikotec/-Woofville.git
 cd Woofville
 2. Install dependencies
 npm install
-# or
+or
 yarn install
 3. Run development server
 npm run dev
-# or
+or
 yarn dev
 Visit http://localhost:5173 to view the app.
 
