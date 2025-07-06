@@ -1,12 +1,95 @@
-# React + Vite
+# 🐶 Woofville
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Woofville** is a modern dog photo discovery app built with **React**, powered by **Firebase**, and styled with **SCSS**.  
+Users can browse random dog photos, like them, and have their favorites persist across devices thanks to Firebase Realtime Database.
 
-Currently, two official plugins are available:
+Live Demo: [woofville-645b9.web.app](https://woofville-645b9.web.app)  
+Repo: [GitHub](https://github.com/krestnoikotec/-Woofville)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📚 Table of Contents
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [🚀 Features](#-features)
+- [🧠 Tech Stack](#-tech-stack)
+- [🛠️ Getting Started](#️-getting-started)
+- [📁 Project Structure](#-project-structure)
+- [🔗 Firebase Setup](#-firebase-setup)
+- [🗄️ How Likes Are Stored in Firebase](#️-how-likes-are-stored-in-firebase)
+- [📜 License](#-license)
+- [✨ Author](#-author)
+
+---
+
+## 🚀 Features
+
+- 🔐 **User authentication** via Firebase (Sign up, Sign in, Sign out)
+- ❤️ **Like system** tied to authenticated users and synced with Firebase Realtime Database
+- 🐾 **Random dog photo feed** via public API
+- 📱 **Responsive UI** with SCSS modules & basic animations (Framer Motion)
+- 🗂️ Modular code structure with reusable components and clean state management (Redux Toolkit)
+
+---
+
+## 🧠 Tech Stack
+
+| Category         | Technologies                                 |
+|------------------|----------------------------------------------|
+| Languages        | JavaScript, SCSS, HTML                       |
+| Frameworks       | React, Vite                                  |
+| Firebase         | Auth, Realtime Database, Hosting             |
+| Routing          | React Router                                 |
+| State Management | Redux Toolkit                                |
+| Animations       | Framer Motion                                |
+| Tooling          | ESLint, Vite                                 |
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the project
+git clone https://github.com/krestnoikotec/-Woofville.git
+cd Woofville
+2. Install dependencies
+npm install
+# or
+yarn install
+3. Run development server
+npm run dev
+# or
+yarn dev
+Visit http://localhost:5173 to view the app.
+
+📁 Project Structure
+src/
+├── assets/            # Static images & styles
+├── components/        # Reusable UI components
+├── features/          # Firebase logic (auth, DB)
+├── pages/             # Page-level components (Home, Favorites, etc.)
+├── redux/             # Redux slices & store config
+├── utils/             # Helper functions
+└── main.jsx           # App entry point
+🔗 Firebase Setup
+To run the project with your own Firebase instance:
+
+Create a Firebase project at firebase.google.com
+
+Enable Authentication → Email/Password
+
+Enable Realtime Database
+
+Add your Firebase config to firebase-config.js inside /features
+
+// /features/firebase-config.js
+const firebaseConfig = {
+  apiKey: "...",
+  authDomain: "...",
+  databaseURL: "...",
+  ...
+};
+
+📜 License
+This project is open-source under the MIT License.
+
+✨ Author
+Created with 💻 and 🐶 by krestnoikotec
