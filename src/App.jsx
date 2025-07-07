@@ -11,10 +11,12 @@ import Header from "@/components/layout/header/Header.jsx";
 import Menu from "@/components/widgets/burgerMenu/Menu.jsx";
 import Footer from "@/components/layout/footer/Footer.jsx";
 import AuthForm from "@/components/widgets/authForm/AuthForm.jsx";
+import Loader from "@/components/widgets/loader/Loader.jsx";
 
 function App() {
     const isBurgerOpen = useSelector(state => state.burger.isBurgerOpen);
     const isAuthOpen = useSelector(state => state.openAuth.isOpenAuth);
+    const isLoading = useSelector(state => state.loader.isLoading);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,6 +37,7 @@ function App() {
 
     return (
         <div className="app-container">
+            {isLoading && <Loader />}
             <AnimatePresence mode="wait">
                 {isBurgerOpen && <Menu />}
             </AnimatePresence>

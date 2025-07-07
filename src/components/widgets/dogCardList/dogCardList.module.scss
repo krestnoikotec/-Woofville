@@ -1,8 +1,13 @@
-.cardList{
+.cardList {
   width: 100%;
   padding: 1rem;
   box-sizing: border-box;
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
   gap: 1rem;
+
+  justify-content: center;
+  align-content: start;
+  max-width: 100%;
 }

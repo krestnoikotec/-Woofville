@@ -7,7 +7,7 @@ import { db } from "@/firebase.js"
 import {removeLike, addLike, setLike} from "@/redux/slices/LikedDogsSlice.js";
 import DogCardList from "@/components/widgets/dogCardList/DogCardList.jsx";
 import MyButton from "@/components/widgets/button/MyButton.jsx";
-import Loader from "@/components/widgets/loader/Loader.jsx";
+import {setLoading} from "@/redux/slices/LoaderSlice.js";
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -15,7 +15,6 @@ const Search = () => {
 
     const [displayedImages, setDisplayedImages] = React.useState([]);
     const [bufferImages, setBufferImages] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(false);
     const [error, setError] = React.useState(null);
 
     const likedDogs = useSelector((state) => state.likes);
@@ -41,8 +40,8 @@ const Search = () => {
             setBufferImages(result.slice(10));
         }
         else{
-            setIsLoading(true);
             try {
+                dispatch(setLoading(true));
                 const result = await dispatch(fetchDogImages({ apiKey, limit: 20 })).unwrap();
                 setDisplayedImages(result.slice(0, 10));
                 setBufferImages(result.slice(10));
@@ -50,7 +49,7 @@ const Search = () => {
             } catch (err) {
                 setError(err.message || "Something went wrong");
             } finally {
-                setIsLoading(false);
+                dispatch(setLoading(false));
             }
         }
     };
@@ -58,6 +57,7 @@ const Search = () => {
     const loadMoreToBuffer = async () => {
         try {
             const result = await dispatch(fetchDogImages({ apiKey, limit: 10 })).unwrap();
+            console.log("NEW IMAGES", result);
             setBufferImages(prev => [...prev, ...result]);
                 const stored = sessionStorage.getItem("images");
                 let storedImages = [];
@@ -102,8 +102,9 @@ const Search = () => {
                 await remove(likeRef);
                 dispatch(removeLike(image.id));
             } else {
-                await set(likeRef, image);
-                dispatch(addLike(image));
+                const likedImageWithTimestamp = { ...image, addedAt: Date.now() };
+                await set(likeRef, likedImageWithTimestamp);
+                dispatch(addLike(likedImageWithTimestamp));
             }
         } catch (err) {
             console.error(err);
@@ -113,12 +114,11 @@ const Search = () => {
     return (
         <div className={styles.search}>
             {error && <p>Помилка: {error}</p>}
-            {isLoading && <Loader/>}
             <DogCardList images={displayedImages} likedDogs={likedDogs} onToggleLike={onToggleLike}/>
             <MyButton
                 onClick={showMoreImages}
             >
-                {isLoading ? "Loading..." : "Show more"}
+                Load more
             </MyButton>
         </div>
     );

@@ -4,7 +4,12 @@ const likedDogsSlice = createSlice({
     name: "likedDogs",
     initialState: {},
     reducers: {
-        setLike: (state, action) => action.payload,
+        setLike: (state, action) => {
+            return {
+                ...state,
+                ...action.payload,
+            };
+        },
         addLike: (state, action) => {
             state[action.payload.id] = action.payload;
         },

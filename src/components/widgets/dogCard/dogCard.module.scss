@@ -1,5 +1,7 @@
-.card{
+.card {
   width: 100%;
+  max-width: 30rem;
+  margin: 0 auto;
   box-sizing: border-box;
   padding: 2rem;
   position: relative;
@@ -11,6 +13,8 @@
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+
 
 .card::before {
   content: "";

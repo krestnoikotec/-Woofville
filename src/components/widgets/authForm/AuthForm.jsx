@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {toggleOpenAuth} from "@/redux/slices/OpenAuthSlice.js";
 import {motion} from "framer-motion";
 import {toggleBurger} from "@/redux/slices/BurgerSlice.js";
+import {getAdditionalUserInfo, sendPasswordResetEmail, getAuth} from "firebase/auth";
 import styles from "./authForm.module.scss";
 import MyButton from "@/components/widgets/button/MyButton.jsx";
 import GoogleLogo from "@/components/icons/GoogleLogo.jsx";
@@ -15,9 +16,9 @@ import UserIcon from "@/components/icons/UserIcon.jsx";
 import FormInput from "@/components/widgets/formInput/FormInput.jsx";
 import OpenLockSymbol from "@/components/icons/OpenLockSymbol.jsx";
 import GitHubLogo from "@/components/icons/GitHubLogo.jsx";
-import {getAdditionalUserInfo} from "firebase/auth";
 
 const AuthForm = () => {
+    const auth = getAuth();
 
     const dispatch = useDispatch();
 
@@ -230,6 +231,16 @@ const AuthForm = () => {
         }
     ];
 
+    const resetPassword = async (email) => {
+        try{
+            await sendPasswordResetEmail(auth, email);
+            alert("\n" +
+                "The email with instructions has been sent! Check your email. If you don't see it, check your spam folder.");
+        }catch(err){
+            console.error(err);
+        }
+    }
+
     return (
                 <motion.div
                     className={styles.authContainer}
@@ -265,6 +276,15 @@ const AuthForm = () => {
 
                                 <MyButton type="submit">Sign In</MyButton>
                             </form>
+                            <p className={styles.authText}>Forgot your password?
+                            <a className={`${styles.authText} ${styles.authLink}`}
+                               onClick={() => {
+                                const emailValue = watch("email");
+                                if (!emailValue) {
+                                    alert("First enter your email");
+                                    return;
+                                }
+                                resetPassword(emailValue);}}>Recover It!</a></p>
                             <p className={styles.authText}>Don't have an account? <a className={`${styles.authText} ${styles.authLink}`} onClick={() => setIsSignIn(!isSignIn)}>Sign up now </a></p>
                             <p className={styles.authText}>Or With</p>
                             <div className={styles.authButtons} >
